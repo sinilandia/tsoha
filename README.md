@@ -1,7 +1,8 @@
 # tsoha
 tsoha k2021
 
-## Aihe: Lauttasaaren lounaspaikat
+## Aihe: Lounasta Larussa
+Lauttasaaren lounaspaikat
 
 ### Keskeiset toiminnot
 
