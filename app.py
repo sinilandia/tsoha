@@ -9,7 +9,9 @@ db = SQLAlchemy(app)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    result = db.session.execute("SELECT * FROM ravintolat")
+    ravintolat = result.fetchall()
+    return render_template("index.html",ravintolat=ravintolat)
 
 
 
