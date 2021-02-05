@@ -24,15 +24,19 @@
     <div class="col-8">
       <h1>Welcome!</h1>
       <p>
-        Ravintolat:
-        {{ ravintolat }}
+        <h2>Ravintolat:</h2>
+     
         <hr>
         {% for ravintola in ravintolat %}
-        {{ ravintola [1] }} <br>
-        {{ ravintola [2] }} <br>
-        {{ ravintola [3] }} <br>
-        {{ ravintola [4] }} <br>
-        Lounaan hinta: {{ ravintola [5] }}
+          {{ ravintola [1] }} <br>
+          {{ ravintola [2] }} <br>
+          {{ ravintola [3] }} <br>
+          {{ ravintola [4] }} <br>
+          Lounaan hinta: {{ ravintola [5] }} <br>
+        
+          {% for lounas in lounaat %}
+            {{ lounas [0] }} <br>
+          {% endfor %}  
         <hr>
         {% endfor %}
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec massa a massa viverra luctus. Aenean ante nibh, convallis sit amet finibus vel, viverra ut ante. Quisque condimentum mi sit amet turpis condimentum, sit amet gravida libero vestibulum. Suspendisse potenti. Fusce varius ac odio at aliquet. Quisque at malesuada lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas molestie efficitur eleifend.

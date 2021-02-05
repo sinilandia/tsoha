@@ -11,7 +11,9 @@ db = SQLAlchemy(app)
 def index():
     result = db.session.execute("SELECT * FROM ravintolat")
     ravintolat = result.fetchall()
-    return render_template("index.html",ravintolat=ravintolat)
+    result = db.session.execute("SELECT nimi FROM lounaat")
+    lounaat = result.fetchall()
+    return render_template("index.html",ravintolat=ravintolat, lounaat=lounaat)
 
 
 
