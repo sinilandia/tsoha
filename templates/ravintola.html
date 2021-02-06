@@ -1,0 +1,54 @@
+<!doctype html>
+
+<title>{{ ravintola [0][1] }}</title>
+
+<body>
+  <div class="container">
+    <nav class="navbar navbar-light bg-light">
+  
+      <a href="/">Etusivu</a>
+      <a href="#">Puhuri</a>
+      <a href="#">Telakka</a>
+      <a href="/ravintola/3">Borneo</a>
+      <a href="/ravintola/2">Makers</a>
+      <a href="#">Loru</a>
+      <a href="#">Pisara</a>
+      <a href="#">Fondi</a>
+      <a href="/ravintola/3">Casa Mare</a>
+    </nav>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <p>
+        <h2> {{ ravintola [0][1] }} </h2>
+        Osoite: {{ ravintola [0][2] }} <br>
+        Puh: {{ ravintola [0][3]}} <br>
+        Email: {{ ravintola [0][4]}} <br>
+        Lounaan hinta: {{ ravintola [0][5]}} <br>  
+      </p>
+
+      
+          {# ONGELMA: Miten olisi järkevintä saada lounaat päivän mukaan allekkain
+          päivän mukaan: 1) käsittele data ja kerää listaksi app.pyssä ja anna tänne 
+          2) käy tässä lounaat läpi 7+2 kertaa 
+          >> Nyt esim. huomenna teksti toistuu, jos on useampi lounasvaihtis #}
+
+        <p>    
+          <h3>Tänään {{ tanaan }}</h3>
+          {% for lounas in lounaat %}
+            {% if lounas[2].strftime("%Y-%m-%d")==tanaan %} 
+                {{ lounas [1] }} <br>
+            {% endif %}
+
+            {% if lounas[2].strftime("%Y-%m-%d")==huomenna %}
+                Huomenna: {{ lounas [1] }}<br>
+            {% endif %}    
+
+          {% endfor %}  
+      </p>
+    </div>
+  </div>     
+</div>
+</body>   
