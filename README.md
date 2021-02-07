@@ -1,7 +1,7 @@
 # tsoha-lounaslarussa
 tsoha k2021
 
-# Heroku-app
+# Heroku-app testaus
 https://tsoha-lounaslarussa.herokuapp.com/
 
 Tällä hetkellä toimii etusivu, Borneo, Makers ja Casa Mare.
