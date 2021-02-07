@@ -14,7 +14,7 @@
       <a href="#">Loru</a>
       <a href="#">Pisara</a>
       <a href="#">Fondi</a>
-      <a href="/ravintola/3">Casa Mare</a>
+      <a href="/ravintola/1">Casa Mare</a>
     </nav>
   </div>
 
@@ -40,13 +40,15 @@
           {% for lounas in lounaat %}
             {% if lounas[2].strftime("%Y-%m-%d")==tanaan %} 
                 {{ lounas [1] }} <br>
-            {% endif %}
-
-            {% if lounas[2].strftime("%Y-%m-%d")==huomenna %}
-                Huomenna: {{ lounas [1] }}<br>
-            {% endif %}    
-
+            {% endif %}  
           {% endfor %}  
+
+          <h3>Huomenna {{huomenna}}</h3>
+          {% for lounas in lounaat %}
+            {% if lounas[2].strftime("%Y-%m-%d")==huomenna %}
+              {{ lounas [1] }}<br>
+            {% endif %}
+          {% endfor %}    
       </p>
     </div>
   </div>     
