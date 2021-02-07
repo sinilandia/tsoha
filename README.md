@@ -6,11 +6,15 @@ https://tsoha-lounaslarussa.herokuapp.com/
 
 Tällä hetkellä toimii etusivu, Borneo, Makers ja Casa Mare.
 
+Käyttäjien kirjautumista ei vielä toteutettu.
+
 ## Aihe: Lounas Larussa
 Näe kätevästi kaikki Lauttasaaren lounaspaikat yhdestä paikkaa!
 Voit myös peukuttamalla ilmoittaa, minne olet menossa tänään. Näin voidaan välttyä ruuhkilta ja pystymme helpommin pitämään turvaväleistä huolta.
 
-Jatkossa voit myös luoda itsellesi tunnukset sivustolle ja arvioida lounaskokemuksesi.
+Lounailijana voit luoda itsellesi tunnukset sivustolle ja arvioida lounaskokemuksesi.
+
+Ravintoloitsijana voit luoda omat tunnukset ja päivittää ravintolasi lounaat. 
 
 ### Keskeiset toiminnot
 
