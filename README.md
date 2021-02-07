@@ -1,35 +1,30 @@
 # tsoha-lounaslarussa
 tsoha k2021
 
+# Heroku-app
+https://tsoha-lounaslarussa.herokuapp.com/
+Tällä hetkellä toimii etusivu, Borneo, Makers ja Casa Mare.
+
 ## Aihe: Lounas Larussa
-Lauttasaaren lounaspaikat
+Näe kätevästi kaikki Lauttasaaren lounaspaikat yhdestä paikkaa!
+Voit myös peukuttamalla ilmoittaa, minne olet menossa tänään. Näin voidaan välttyä ruuhkilta ja pystymme helpommin pitämään turvaväleistä huolta.
+
+Jatkossa voit myös luoda itsellesi tunnukset sivustolle ja arvioida lounaskokemuksesi.
 
 ### Keskeiset toiminnot
 
-Etusivu:
-- kartta
-- listaus ravintoloista ja lounaista allekkain
-- ravintolan kohdalla nappi "menen tänne" tai annoksen kohdalla peukku-nappi > datan kertyessä ravintolan/annoksen suosio tähtinä? (toimii kirjautumatta)
+**Etusivulta** löydät kartan kaikista Lauttasaaren lounaspaikoista.
+Kartan alla näkyvät ravintolat ja niiden lounaat listana allekkain. 
 
-Ravintolakohtainen sivu:
-- Ravintolan nimi
-- Lounaan hinta
-- Lounaan kellonaika
-- Lounasannokset
-- Osoite ja sijainti kartalla
-- Peukku-nappula tai tähtiä annoksen tai ravintolan kohdalla? (toimii kirjautumatta)
-- Ehkä customer testimonial?
+**Ravintolakohtaiselta** sivulta löydät ravintolan tiedot ja näet koko viikon lounaslistan. Täältä löytyy myös ravintola kartalta. Täältä näet ravintolan lounaiden suosion tähtinä/peukkuina.
 
-Puuttuvat ominaisuudet, mitä olisi hyvä olla / haasteita:
-- Käyttäjätasot: admin, tavallinen käyttäjä, kirjautumaton käyttäjä
-- Tavallinen käyttäjä voi kirjoittaa arvosteluja ravintoloista
-- Kirjautumaton käyttäjä voi peukuttaa ravintoloita/annoksia
-- Miten saan lounaat sivuilleni, kun jotkut ravintolat päivittää lounaslistan kuvana instagramin storeihin tms? 
+Jatkossa tänne voi myös kirjoittaa oman arvion ravintolan lounaskokemuksesta.
 
-SQL-tables:
+**SQL-taulut**
 - Ravintolat
-- Ravintola
 - Lounaat
-- Arvostelut / peukut
-- pitää kerrata miten tää SQL toimikaan :D 
 
+Pitää vielä lisätä
+- Arvostelut
+- peukut/tähdet
+- käyttäjälistaus
