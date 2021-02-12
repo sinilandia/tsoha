@@ -1,0 +1,45 @@
+<!doctype html>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<title>Lounas Larussa - {% block title %}{% endblock %}</title>
+
+<head>
+    <style>
+        a {
+            color:#92ABD1;
+        }
+
+        a:hover {
+            color: #F7CAC9;
+        }
+
+       
+        
+    </style>
+</head>
+
+<div class="container">
+    <nav class="navbar navbar-light bg-light">
+      <img class="logo" src="{{url_for('static', filename='logo.png')}}">  
+      <a href="/">Etusivu</a>
+      <a href="#">Puhuri</a>
+      <a href="#">Telakka</a>
+      <a href="/ravintola/3">Borneo</a>
+      <a href="/ravintola/2">Makers</a>
+      <a href="#">Loru</a>
+      <a href="#">Pisara</a>
+      <a href="#">Fondi</a>
+      <a href="/ravintola/1">Casa Mare</a>
+    </nav>
+</div>
+
+<hr>
+    {% block content %}{% endblock %}
+</hr>
+
+<div class="container">
+    <footer class="navbar navbar-light bg-light">
+        <p>Lounas Larussa päivitetty viimeksi 12.2.2021</p>
+        <p><a href="mailto:aisinilandia@gmail.com">aisinilandia(a)gmail.com</a></p>
+    </footer>
+</div>
