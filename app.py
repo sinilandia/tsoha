@@ -29,5 +29,6 @@ def ravintolat(id):
     tanaan = date.today().strftime("%Y-%m-%d")
     huomenna = date.today() + timedelta(days=1)
     huomenna = huomenna.strftime("%Y-%m-%d")
+
     return render_template("ravintola.html", id=id, ravintola=ravintola, lounaat=lounaat, tanaan=tanaan, huomenna=huomenna)
 
