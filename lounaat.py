@@ -1,7 +1,5 @@
 from db import db
 
-#define tietokantakomennot
-
 def hae_ravintolat():
     result = db.session.execute("SELECT * FROM ravintolat")
     ravintolat = result.fetchall()

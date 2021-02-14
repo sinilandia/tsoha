@@ -1,8 +1,10 @@
 from app import app
 import lounaat
+import users
 from flask import redirect, render_template, request, session
 from datetime import date, datetime, timedelta
 from werkzeug.security import check_password_hash, generate_password_hash
+
 
 @app.route("/")
 def index():
@@ -19,4 +21,21 @@ def ravintolat(id):
     huomenna = huomenna.strftime("%Y-%m-%d")
 
     return render_template("ravintola.html", id=id, ravintola=ravintola, lounaat=ravintolan_lounaat, tanaan=tanaan, huomenna=huomenna)
+
+@app.route("/kirjautuminen")
+def kirjautuminen():
+    return render_template("login.html")
+
+@app.route("/login",methods=["POST"])
+def login():
+    username = request.form["username"]
+    password = request.form["password"]
+    #TODO: check username & password
+    session["username"] = username
+    return redirect("/")
+
+@app.route("/logout")
+def logout():
+    del session["username"] 
+    return redirect("/")   
 
