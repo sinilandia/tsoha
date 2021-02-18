@@ -15,12 +15,29 @@ def index():
 @app.route("/ravintola/<int:id>")
 def ravintolat(id):
     ravintola = lounaat.hae_ravintola(id)
-    ravintolan_lounaat = lounaat.hae_ravintolan_lounaat(id)
-    tanaan = date.today().strftime("%Y-%m-%d")
-    huomenna = date.today() + timedelta(days=1)
-    huomenna = huomenna.strftime("%Y-%m-%d")
 
-    return render_template("ravintola.html", id=id, ravintola=ravintola, lounaat=ravintolan_lounaat, tanaan=tanaan, huomenna=huomenna)
+    lounaat_tanaan,lounaat_huomenna,lounaat_maanantai,lounaat_tiistai,lounaat_keskiviikko,lounaat_torstai,lounaat_perjantai = lounaat.hae_ravintolan_lounaat(id)
+
+    tanaan,huomenna,maanantai,tiistai,keskiviikko,torstai,perjantai=lounaat.hae_paivat()
+    print(torstai)
+    print(lounaat_torstai)
+
+    return render_template("ravintola.html", id=id, 
+    ravintola=ravintola, 
+    lounaat_tanaan=lounaat_tanaan,
+    lounaat_huomenna=lounaat_huomenna,
+    lounaat_maanantai=lounaat_maanantai,
+    lounaat_tiistai=lounaat_tiistai,
+    lounaat_keskiviikko=lounaat_keskiviikko,
+    lounaat_torstai=lounaat_torstai,
+    lounaat_perjantai=lounaat_perjantai, 
+    tanaan=tanaan, 
+    huomenna=huomenna,
+    maanantai=maanantai,
+    tiistai=tiistai,
+    keskiviikko=keskiviikko,
+    torstai=torstai,
+    perjantai=perjantai)
 
 @app.route("/kirjautuminen")
 def kirjautuminen():

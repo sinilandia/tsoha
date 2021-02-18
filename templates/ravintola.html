@@ -15,26 +15,56 @@
         Email: {{ ravintola [0][4]}} <br>
         Lounaan hinta: {{ ravintola [0][5]}} <br>  
       </p>
-
-      
     
         <p>    
           <h3>Tänään {{ tanaan }}</h3>
-          {% for lounas in lounaat %}
-            {% if lounas[2].strftime("%Y-%m-%d")==tanaan %} 
-                {{ lounas [1] }} <br>
-            {% endif %}  
+          {% for lounas in lounaat_tanaan %}              
+            {{ lounas [1] }} <br>
           {% endfor %}  
 
           <h3>Huomenna {{huomenna}}</h3>
-          {% for lounas in lounaat %}
-            {% if lounas[2].strftime("%Y-%m-%d")==huomenna %}
+          {% for lounas in lounaat_huomenna %}
+            {% if lounas[2]==huomenna %}
               {{ lounas [1] }}<br>
             {% endif %}
-          {% endfor %}    
-       </p>
-       <p>
-         <h3>Maanantai</h3>
+          {% endfor %}  
+      
+          {% for lounas in lounaat_maanantai %}
+            <h3>Maanantai {{maanantai}}</h3>
+            {% if lounas[2]==maanantai %}
+              {{ lounas [1] }}<br>
+            {% endif %}  
+          {% endfor %}
+
+          {% for lounas in lounaat_tiistai %}
+            <h3>Tiistai {{tiistai}}</h3>
+            {% if lounas[2]==tiistai %}
+              {{ lounas [1] }}<br>
+            {% endif %}  
+          {% endfor %}
+
+          {% for lounas in lounaat_keskiviikko %}
+            <h3>Keskiviikko {{keskiviikko}}</h3>
+            {% if lounas[2]==keskiviikko %}
+              {{ lounas [1] }}<br>
+            {% endif %}  
+          {% endfor %}
+          
+          {% for lounas in lounaat_torstai %}
+            <h3>Torstai {{torstai}}</h3>
+     
+              {{ lounas [1] }}<br>
+ 
+          {% endfor %}
+
+          {% for lounas in lounaat_perjantai %}
+            <h3>Perjantai {{perjantai}}</h3>
+            {% if lounas[2]==perjantai %}
+              {{ lounas [1] }}<br>
+            {% endif %}  
+          {% endfor %}
+
+
 
        </p>
     </div>

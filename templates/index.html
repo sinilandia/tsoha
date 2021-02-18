@@ -18,11 +18,10 @@
           {{ ravintola [4] }} <br>
           Lounaan hinta: {{ ravintola [5] }} <br>
         
-          {# pitäisikö tämä sortteerata app.py ssä? kokeilin, en osannut #}
           {% for lounas in lounaat %}
             {% if lounas [4]==ravintola [0] %}
               {{ lounas [1] }} <br>
-              Peukut: {{ lounas [3] }}<br>  {# pitää muotoilla peukut omaksi tauluksi ja omat nappulat ja paikka #}
+              Peukut: {{ lounas [3] }}<br>  
             {% endif %}  
           {% endfor %}  
         <hr>
