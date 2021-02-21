@@ -4,9 +4,11 @@ tsoha k2021
 # Heroku-app testaus
 https://tsoha-lounaslarussa.herokuapp.com/
 
-Tällä hetkellä toimii etusivu, Borneo, Makers ja Casa Mare.
+Tällä hetkellä toimii etusivu, Borneo, Makers, Puhuri ja Casa Mare.
 
-Käyttäjien kirjautumista ei vielä toteutettu.
+Käyttäjät voivat luoda tilin ja kirjautua. 
+
+Jos haluaa ravintoloitsija-tilin, ylläpitäjän pitää käydä tämä erikseen muuttamassa tietokantataulussa. Tätä voi testata tunnuksilla Puhuri, salasana ravintoloitsija.
 
 ## Aihe: Lounas Larussa
 Näe kätevästi kaikki Lauttasaaren lounaspaikat yhdestä paikkaa!
