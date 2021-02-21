@@ -24,48 +24,33 @@
 
           <h3>Huomenna {{huomenna}}</h3>
           {% for lounas in lounaat_huomenna %}
-            {% if lounas[2]==huomenna %}
               {{ lounas [1] }}<br>
-            {% endif %}
           {% endfor %}  
-      
+
+          <h3>Maanantai {{maanantai}}</h3>
           {% for lounas in lounaat_maanantai %}
-            <h3>Maanantai {{maanantai}}</h3>
-            {% if lounas[2]==maanantai %}
               {{ lounas [1] }}<br>
-            {% endif %}  
           {% endfor %}
 
+          <h3>Tiistai {{tiistai}}</h3>
           {% for lounas in lounaat_tiistai %}
-            <h3>Tiistai {{tiistai}}</h3>
-            {% if lounas[2]==tiistai %}
-              {{ lounas [1] }}<br>
-            {% endif %}  
+              {{ lounas [1] }}<br> 
           {% endfor %}
 
+          <h3>Keskiviikko {{keskiviikko}}</h3>
           {% for lounas in lounaat_keskiviikko %}
-            <h3>Keskiviikko {{keskiviikko}}</h3>
-            {% if lounas[2]==keskiviikko %}
-              {{ lounas [1] }}<br>
-            {% endif %}  
+            {{ lounas [1] }}<br>
           {% endfor %}
-          
+   
+          <h3>Torstai {{torstai}}</h3>
           {% for lounas in lounaat_torstai %}
-            <h3>Torstai {{torstai}}</h3>
-     
               {{ lounas [1] }}<br>
- 
           {% endfor %}
 
+          <h3>Perjantai {{perjantai}}</h3>
           {% for lounas in lounaat_perjantai %}
-            <h3>Perjantai {{perjantai}}</h3>
-            {% if lounas[2]==perjantai %}
               {{ lounas [1] }}<br>
-            {% endif %}  
           {% endfor %}
-
-
-
        </p>
     </div>
   </div>     

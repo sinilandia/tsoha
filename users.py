@@ -26,7 +26,7 @@ def kayttajan_ravintola_id(username):
     result = db.session.execute(sql, {"username":username})
     ravintola_id = result.fetchone()
 
-    if ravintola_id == None:
+    if ravintola_id[0] == None:
         return 0
     else:
         return ravintola_id[0]

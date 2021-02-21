@@ -71,14 +71,19 @@ def lunch():
 
 @app.route("/addlunch",methods=["POST"])
 def add_lunch():
-    print("TÄSTÄ ALKAA PRINTIT")
-    print(session["username"])
     ravintola_id = users.kayttajan_ravintola_id(session["username"])
-    print(repr(ravintola_id))
+    print("OLEN RAVINTOLAN_ID")
+    print(ravintola_id)
     nimi = request.form["lounas"]
     pvm = request.form["paivamaara"]
+    if len(nimi) < 1 or len(nimi)>150:
+        return render_template("error.html", viesti="Lounaan nimi ei voi olla tyhjä eikä yli 150 merkkiä")
+    if pvm=='':
+        return render_template("error.html", viesti="Lounaalta puuttuu päivämäärä")
     if ravintola_id!=0: 
         lounaat.lisaa_lounas(nimi, pvm, ravintola_id)
-        return redirect("/")
+        return redirect("/lunch")
+    if ravintola_id==0:
+        return render_template("error.html", viesti="Sinulla ei ole oikeuksia lisätä lounaita.")
     else:
         return render_template("error.html", viesti="Lounaan lisäys ei onnistunut")
