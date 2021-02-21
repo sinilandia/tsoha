@@ -39,17 +39,28 @@ def ravintolat(id):
 
 @app.route("/kirjautuminen")
 def kirjautuminen():
-    return render_template("login.html")
+    return render_template("login.html")  
 
 @app.route("/login",methods=["POST"])
 def login():
     username = request.form["username"]
     password = request.form["password"]
-    #TODO: check username & password
-    session["username"] = username
+    viesti = users.onko_oikein(username,password)
+        
+    if viesti == "Kirjautuminen onnistui":            
+        session["username"] = username
+        return redirect("/kirjautuminen")
+    else:
+        return render_template("error.html", viesti=viesti)   
+
+@app.route("/newuser",methods=["POST"])
+def uusi_kayttaja():
+    username = request.form["username"]
+    password = request.form["password"]
+    users.luo_kayttaja(username,password)
     return redirect("/kirjautuminen")
 
 @app.route("/logout")
 def logout():
     del session["username"] 
-    return redirect("/")   
+    return redirect("/kirjautuminen")   

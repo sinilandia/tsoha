@@ -13,19 +13,10 @@ def onko_oikein(username, password):
     result = db.session.execute(sql, {"username":username})
     user = result.fetchone()
     if user == None:
-        # TODO: invalid username
-        pass
+        return "Käyttäjää ei ole olemassa"
     else:
         hash_value = user[0]
         if check_password_hash(hash_value, password):
-            # TODO: correct username & password
-            pass
+            return "Kirjautuminen onnistui"
         else:
-            # TODO: invalid password     
-            pass
-
-def hae_ravintola(id):
-    sql = "SELECT * FROM ravintolat WHERE id=:id"
-    result = db.session.execute(sql, {"id":id})
-    ravintola = result.fetchall()
-    return ravintola
+            return "Väärä salasana"
