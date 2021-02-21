@@ -10,44 +10,46 @@
     <div class="col-12">
       <p>
         <h2> {{ ravintola [0][1] }} </h2>
-        Osoite: {{ ravintola [0][2] }} <br>
-        Puh: {{ ravintola [0][3]}} <br>
-        Email: {{ ravintola [0][4]}} <br>
-        Lounaan hinta: {{ ravintola [0][5]}} <br>  
+        <p class="info">
+          Osoite: {{ ravintola [0][2] }} <br>
+          Puh: {{ ravintola [0][3]}} <br>
+          Email: {{ ravintola [0][4]}} <br>
+          Lounaan hinta: {{ ravintola [0][5]}} <br>  
+        </p>
       </p>
     
         <p>    
-          <h6>Tänään {{ tanaan }}</h6>
+          <h4>Tänään {{ tanaan }}</h4>
           {% for lounas in lounaat_tanaan %}              
             {{ lounas [1] }} <br>
           {% endfor %}  
 
-          <h6>Huomenna {{huomenna}}</h6>
+          <h4>Huomenna {{huomenna}}</h4>
           {% for lounas in lounaat_huomenna %}
               {{ lounas [1] }}<br>
           {% endfor %}  
 
-          <h6>Maanantai {{maanantai}}</h6>
+          <h4>Maanantai {{maanantai}}</h4>
           {% for lounas in lounaat_maanantai %}
               {{ lounas [1] }}<br>
           {% endfor %}
 
-          <h6>Tiistai {{tiistai}}</h6>
+          <h4>Tiistai {{tiistai}}</h4>
           {% for lounas in lounaat_tiistai %}
               {{ lounas [1] }}<br> 
           {% endfor %}
 
-          <h6>Keskiviikko {{keskiviikko}}</h6>
+          <h4>Keskiviikko {{keskiviikko}}</h4>
           {% for lounas in lounaat_keskiviikko %}
             {{ lounas [1] }}<br>
           {% endfor %}
    
-          <h6>Torstai {{torstai}}</h6>
+          <h4>Torstai {{torstai}}</h4>
           {% for lounas in lounaat_torstai %}
               {{ lounas [1] }}<br>
           {% endfor %}
 
-          <h6>Perjantai {{perjantai}}</h6>
+          <h4>Perjantai {{perjantai}}</h4>
           {% for lounas in lounaat_perjantai %}
               {{ lounas [1] }}<br>
           {% endfor %}
