@@ -19,8 +19,6 @@ def ravintolat(id):
     lounaat_tanaan,lounaat_huomenna,lounaat_maanantai,lounaat_tiistai,lounaat_keskiviikko,lounaat_torstai,lounaat_perjantai = lounaat.hae_ravintolan_lounaat(id)
 
     tanaan,huomenna,maanantai,tiistai,keskiviikko,torstai,perjantai=lounaat.hae_paivat()
-    print(torstai)
-    print(lounaat_torstai)
 
     return render_template("ravintola.html", id=id, 
     ravintola=ravintola, 
@@ -55,4 +53,3 @@ def login():
 def logout():
     del session["username"] 
     return redirect("/")   
-
