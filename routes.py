@@ -47,7 +47,7 @@ def login():
     password = request.form["password"]
     #TODO: check username & password
     session["username"] = username
-    return redirect("/")
+    return redirect("/kirjautuminen")
 
 @app.route("/logout")
 def logout():
