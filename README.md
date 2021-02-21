@@ -1,7 +1,7 @@
 # tsoha-lounaslarussa
 tsoha k2021
 
-# Heroku-app testaus
+# Heroku-sovelluksen testaus
 https://tsoha-lounaslarussa.herokuapp.com/
 
 Tällä hetkellä toimii etusivu, Puhuri, Borneo, Makers ja Casa Mare. Etusivu näyttää lounaat tänään. Ravintolan oma sivu näyttää tämän viikon lounaat. 
