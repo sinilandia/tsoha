@@ -20,3 +20,14 @@ def onko_oikein(username, password):
             return "Kirjautuminen onnistui"
         else:
             return "Väärä salasana"
+
+def kayttajan_ravintola_id(username):
+    sql = "SELECT ravintoloitsija FROM kayttajat WHERE tunnus=:username"
+    result = db.session.execute(sql, {"username":username})
+    ravintola_id = result.fetchone()
+
+    if ravintola_id == None:
+        return 0
+    else:
+        return ravintola_id[0]
+    

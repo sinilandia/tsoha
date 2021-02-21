@@ -64,3 +64,21 @@ def uusi_kayttaja():
 def logout():
     del session["username"] 
     return redirect("/kirjautuminen")   
+
+@app.route("/lunch")
+def lunch():
+    return render_template("addlunch.html")
+
+@app.route("/addlunch",methods=["POST"])
+def add_lunch():
+    print("TÄSTÄ ALKAA PRINTIT")
+    print(session["username"])
+    ravintola_id = users.kayttajan_ravintola_id(session["username"])
+    print(repr(ravintola_id))
+    nimi = request.form["lounas"]
+    pvm = request.form["paivamaara"]
+    if ravintola_id!=0: 
+        lounaat.lisaa_lounas(nimi, pvm, ravintola_id)
+        return redirect("/")
+    else:
+        return render_template("error.html", viesti="Lounaan lisäys ei onnistunut")

@@ -8,7 +8,7 @@ Tällä hetkellä toimii etusivu, Borneo, Makers, Puhuri ja Casa Mare.
 
 Käyttäjät voivat luoda tilin ja kirjautua. 
 
-Jos haluaa ravintoloitsija-tilin, ylläpitäjän pitää käydä tämä erikseen muuttamassa tietokantataulussa. Tätä voi testata tunnuksilla Puhuri, salasana ravintoloitsija.
+Jos haluaa ravintoloitsija-tilin, ylläpitäjän pitää käydä tämä erikseen muuttamassa tietokantataulussa. Tätä voi testata tunnuksilla Puhuri, salasana ravintola.
 
 ## Aihe: Lounas Larussa
 Näe kätevästi kaikki Lauttasaaren lounaspaikat yhdestä paikkaa!

@@ -1,0 +1,21 @@
+<!doctype html>
+{% extends "layout.html" %}
+{% block title %}Lisää lounas{% endblock %}
+
+{% block content %}
+<body>
+    <div class="container">
+        <h1>Lisää lounas</h1>
+    
+        <form action="/addlunch" method="POST">
+            <label for="lounas">Lounas:</label> <br>
+                <input type="text" id="lounas" name="lounas"><br>
+            
+            <label for="paivamaara">Päivämäärä:</label> <br>
+                <input type="date" id="paivamaara" name="paivamaara">
+            <input type="submit" value="Lisää lounas">
+        </form>
+    </div>
+
+</body>        
+{% endblock %}

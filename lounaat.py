@@ -64,3 +64,10 @@ def hae_ravintolan_lounaat(id):
     print(lounaat_torstai)
 
     return lounaat_tanaan,lounaat_huomenna,lounaat_maanantai,lounaat_tiistai,lounaat_keskiviikko,lounaat_torstai,lounaat_perjantai
+
+
+def lisaa_lounas(nimi, pvm, ravintola_id):
+    sql = "INSERT INTO lounaat (nimi, pvm, peukut, ravintola_id) VALUES (:nimi, :pvm, 0, :ravintola_id)"
+    result = db.session.execute(sql, {"nimi":nimi, "pvm":pvm, "ravintola_id":ravintola_id})
+    db.session.commit()
+    return True
