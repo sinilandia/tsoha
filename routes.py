@@ -72,8 +72,6 @@ def lunch():
 @app.route("/addlunch",methods=["POST"])
 def add_lunch():
     ravintola_id = users.kayttajan_ravintola_id(session["username"])
-    print("OLEN RAVINTOLAN_ID")
-    print(ravintola_id)
     nimi = request.form["lounas"]
     pvm = request.form["paivamaara"]
     if len(nimi) < 1 or len(nimi)>150:
