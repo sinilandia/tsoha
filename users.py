@@ -22,7 +22,7 @@ def onko_oikein(username, password):
             return "Väärä salasana"
 
 def kayttajan_ravintola_id(username):
-    sql = "SELECT ravintoloitsija FROM kayttajat WHERE tunnus=:username"
+    sql = "SELECT ravintola_id FROM kayttajat WHERE tunnus=:username"
     result = db.session.execute(sql, {"username":username})
     ravintola_id = result.fetchone()
 

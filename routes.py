@@ -49,6 +49,7 @@ def login():
         
     if viesti == "Kirjautuminen onnistui":            
         session["username"] = username
+        session["ravintola_id"] = users.kayttajan_ravintola_id(session["username"])
         return redirect("/kirjautuminen")
     else:
         return render_template("error.html", viesti=viesti)   
@@ -71,7 +72,7 @@ def lunch():
 
 @app.route("/addlunch",methods=["POST"])
 def add_lunch():
-    ravintola_id = users.kayttajan_ravintola_id(session["username"])
+    ravintola_id = session["ravintola_id"]
     nimi = request.form["lounas"]
     pvm = request.form["paivamaara"]
     if len(nimi) < 1 or len(nimi)>150:
