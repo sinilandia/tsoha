@@ -4,9 +4,13 @@ from db import db
 
 def luo_kayttaja(username, password):
     hash_value = generate_password_hash(password)
-    sql = "INSERT INTO kayttajat (tunnus, salasana) VALUES (:username, :password)"
-    db.session.execute(sql, {"username":username, "password":hash_value})
-    db.session.commit()
+    sql = "SELECT tunnus FROM kayttajat WHERE tunnus=:username"
+    result = db.session.execute(sql, {"username":username})
+    if result.fetchone() == None: 
+        sql = "INSERT INTO kayttajat (tunnus, salasana) VALUES (:username, :password)"
+        db.session.execute(sql, {"username":username, "password":hash_value})
+        db.session.commit()
+        return True
 
 def onko_oikein(username, password):
     sql = "SELECT salasana FROM kayttajat WHERE tunnus=:username"

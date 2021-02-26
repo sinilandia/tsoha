@@ -44,16 +44,21 @@
 </head>
 
 <div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     <nav class="navbar navbar-light bg-light">
       <a href="/"><img class="logo" src="{{url_for('static', filename='logo.png')}}"></a> 
-      <a href="/ravintola/4">Puhuri</a>
-      <a href="#">Telakka</a>
-      <a href="/ravintola/3">Borneo</a>
-      <a href="/ravintola/2">Makers</a>
-      <a href="#">Loru</a>
-      <a href="#">Pisara</a>
-      <a href="#">Fondi</a>
-      <a href="/ravintola/1">Casa Mare</a>
+      
+      {% for rafla in ravintolat %}
+        <a href="/ravintola/{{ rafla[0] }}">{{ rafla[1] }}</a> 
+      {% endfor %}
       <a href="/kirjautuminen">Kirjaudu</a>
     </nav>
 </div>

@@ -1,11 +1,12 @@
 from app import app
 import lounaat
 import users
-from flask import redirect, render_template, request, session
+from flask import redirect, render_template, request, session, flash
 from datetime import date, datetime, timedelta
 from werkzeug.security import check_password_hash, generate_password_hash
 import os
 from os import urandom
+
 
 
 @app.route("/")
@@ -14,8 +15,13 @@ def index():
     lounaat_tanaan= lounaat.hae_lounaat_tanaan()
     return render_template("index.html",ravintolat=ravintolat, lounaat=lounaat_tanaan)
 
+@app.route("/layout")
+def luo_navigaatio():
+    ravintolat = lounaat.hae_ravintolat()
+    return render_template("layout.html",ravintolat=ravintolat)
+
 @app.route("/ravintola/<int:id>")
-def ravintolat(id):
+def ravintolan_sivu(id):
     ravintola = lounaat.hae_ravintola(id)
 
     lounaat_tanaan,lounaat_huomenna,lounaat_maanantai,lounaat_tiistai,lounaat_keskiviikko,lounaat_torstai,lounaat_perjantai = lounaat.hae_ravintolan_lounaat(id)
@@ -41,10 +47,12 @@ def ravintolat(id):
 
 @app.route("/kirjautuminen")
 def kirjautuminen():
-    return render_template("login.html")  
+    ravintolat = lounaat.hae_ravintolat()
+    return render_template("login.html", ravintolat=ravintolat)  
 
 @app.route("/login",methods=["POST"])
 def login():
+    ravintolat = lounaat.hae_ravintolat()
     username = request.form["username"]
     password = request.form["password"]
     viesti = users.onko_oikein(username,password)
@@ -61,15 +69,20 @@ def login():
 def uusi_kayttaja():
     username = request.form["username"]
     password = request.form["password"]
-    users.luo_kayttaja(username,password)
+    if (users.luo_kayttaja(username,password)):
+        message = "Tili luotu käyttäjälle " + username
+        flash(message, 'success')
+    else: 
+        flash("Tiliä ei voitu luoda. Käyttäjätunnus on jo käytössä.", 'danger')  
     return redirect("/kirjautuminen")
 
 @app.route("/logout")
 def logout():
+    flash('Kirjauduit ulos.', 'success')
     del session["username"]
     del session["ravintola_id"]
     del session["csrf_token"] 
-    return redirect("/kirjautuminen")   
+    return redirect("/")   
 
 @app.route("/lunch")
 def lunch():
