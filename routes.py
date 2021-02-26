@@ -4,6 +4,8 @@ import users
 from flask import redirect, render_template, request, session
 from datetime import date, datetime, timedelta
 from werkzeug.security import check_password_hash, generate_password_hash
+import os
+from os import urandom
 
 
 @app.route("/")
@@ -50,6 +52,7 @@ def login():
     if viesti == "Kirjautuminen onnistui":            
         session["username"] = username
         session["ravintola_id"] = users.kayttajan_ravintola_id(session["username"])
+        session["csrf_token"] = os.urandom(16).hex()
         return redirect("/kirjautuminen")
     else:
         return render_template("error.html", viesti=viesti)   
@@ -63,7 +66,9 @@ def uusi_kayttaja():
 
 @app.route("/logout")
 def logout():
-    del session["username"] 
+    del session["username"]
+    del session["ravintola_id"]
+    del session["csrf_token"] 
     return redirect("/kirjautuminen")   
 
 @app.route("/lunch")
@@ -75,6 +80,9 @@ def add_lunch():
     ravintola_id = session["ravintola_id"]
     nimi = request.form["lounas"]
     pvm = request.form["paivamaara"]
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
+
     if len(nimi) < 1 or len(nimi)>150:
         return render_template("error.html", viesti="Lounaan nimi ei voi olla tyhjä eikä yli 150 merkkiä")
     if pvm=='':
