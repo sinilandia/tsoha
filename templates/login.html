@@ -10,7 +10,9 @@
             {% if session.username %}
                 <p>Olet kirjautunut nimellä {{ session.username }}</p>
                 <a href="/logout">Kirjaudu ulos</a><br>
+            {% if session.ravintola_id!=0 %}
                 <a href="/lunch">Lisää lounas</a>
+            {% endif %}    
 
         </div>
       </div>   
