@@ -56,8 +56,9 @@
     <nav class="navbar navbar-light bg-light">
       <a href="/"><img class="logo" src="{{url_for('static', filename='logo.png')}}"></a> 
       
-      {% for rafla in ravintolat %}
-        <a href="/ravintola/{{ rafla[0] }}">{{ rafla[1] }}</a> 
+      <!-- populate navigation pane with restaurants -->
+      {% for name, id in session.restaurants.items() %}
+        <a href="/ravintola/{{ id }}"> {{ name }}</a> 
       {% endfor %}
       <a href="/kirjautuminen">Kirjaudu</a>
     </nav>

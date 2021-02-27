@@ -6,6 +6,14 @@ def hae_ravintolat():
     ravintolat = result.fetchall()
     return ravintolat
 
+def fetch_restaurant_names():
+    result = db.session.execute("SELECT id, nimi FROM ravintolat ORDER BY nimi ASC")
+    restaurant_names = result.fetchall()
+    names = {}
+    for restaurant in restaurant_names:
+        names[restaurant[1]] = restaurant[0]
+    return names
+
 def hae_lounaat_tanaan():
     result = db.session.execute("SELECT * from lounaat WHERE pvm = CURRENT_DATE")
     lounaat_tanaan = result.fetchall()
@@ -59,9 +67,6 @@ def hae_ravintolan_lounaat(id):
             lounaat_torstai.append(lounas)
         if lounas[2]==perjantai:
             lounaat_perjantai.append(lounas)
-
-    print(torstai)
-    print(lounaat_torstai)
 
     return lounaat_tanaan,lounaat_huomenna,lounaat_maanantai,lounaat_tiistai,lounaat_keskiviikko,lounaat_torstai,lounaat_perjantai
 

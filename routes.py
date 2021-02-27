@@ -12,16 +12,16 @@ from os import urandom
 @app.route("/")
 def index():
     ravintolat = lounaat.hae_ravintolat()
+    session["restaurants"] = lounaat.fetch_restaurant_names()
+    print("INDEX")
+    print(session["restaurants"])
     lounaat_tanaan= lounaat.hae_lounaat_tanaan()
     return render_template("index.html",ravintolat=ravintolat, lounaat=lounaat_tanaan)
 
-@app.route("/layout")
-def luo_navigaatio():
-    ravintolat = lounaat.hae_ravintolat()
-    return render_template("layout.html",ravintolat=ravintolat)
-
 @app.route("/ravintola/<int:id>")
 def ravintolan_sivu(id):
+    print("RAVINTOLAN_SIVU:")
+    print(session["restaurants"])
     ravintola = lounaat.hae_ravintola(id)
 
     lounaat_tanaan,lounaat_huomenna,lounaat_maanantai,lounaat_tiistai,lounaat_keskiviikko,lounaat_torstai,lounaat_perjantai = lounaat.hae_ravintolan_lounaat(id)
@@ -47,12 +47,10 @@ def ravintolan_sivu(id):
 
 @app.route("/kirjautuminen")
 def kirjautuminen():
-    ravintolat = lounaat.hae_ravintolat()
-    return render_template("login.html", ravintolat=ravintolat)  
+    return render_template("login.html")  
 
 @app.route("/login",methods=["POST"])
 def login():
-    ravintolat = lounaat.hae_ravintolat()
     username = request.form["username"]
     password = request.form["password"]
     viesti = users.onko_oikein(username,password)
