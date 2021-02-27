@@ -8,7 +8,7 @@
 <body>
 <div class="container">
   <div class="row">
-    <div class="col-12">
+    <div class="col-6">
       <p>
         <h2> {{ ravintola [0][1] }} </h2>
         <p class="info">
@@ -18,7 +18,13 @@
           Lounaan hinta: {{ ravintola [0][5]}} <br>  
         </p>
       </p>
-    
+    </div>
+
+    <div class="col-6">  
+      <button type="button">Lisää suosikiksi</button>
+    </div>
+
+    <div class="col-12">
         <p>    
           <h4>Tänään {{ tanaan }}</h4>
           {% for lounas in lounaat_tanaan %}              

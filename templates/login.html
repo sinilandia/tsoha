@@ -6,7 +6,7 @@
 <body>
     <div class="container">
       <div class="row">
-        <div class="col">
+        <div class="col-12">
             {% if session.username %}
                 <p>Olet kirjautunut nimellä {{ session.username }}</p>
                 <a href="/logout">Kirjaudu ulos</a><br>
@@ -15,12 +15,15 @@
             {% endif %}    
 
         </div>
-      </div>   
+      </div>  
+    </div>     
 
-        <div class="row">
-            {% else %}
-            <div class="col">
+    {% else %}
+    <div class="container">
+        <div class="row">    
+            <div class="col-6">
                 <form action="/login" method="POST">
+                    <h2>Kirjaudu sisään</h2>
                     <p>Tunnus: <br>
                         <input type="text" name="username">
                     </p>
@@ -32,8 +35,9 @@
                 </form>
             </div>
 
-            <div class="col">
+            <div class="col-6">
                 <form action="/newuser" method="POST">
+                    <h2>Luo uusi käyttäjätunnus</h2>
                     <p>Keksi itsellesi käyttäjätunnus: <br>
                         <input type="text" name="username">
                     </p>
@@ -43,6 +47,7 @@
 
                     <input type="submit" value="Luo uusi tunnus">
                 </form>
+                <p><br>*Ravintoloitsijat: luo uusi tunnus ja ilmoita Sinille. </p>
             </div>    
             {% endif %}
         </div>
