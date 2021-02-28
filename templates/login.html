@@ -22,7 +22,7 @@
     <div class="container">
         <div class="row">    
             <div class="col-6">
-                <form action="/login" method="POST">
+                <form action="/login" method="POST" onsubmit="return check(this)">
                     <h2>Kirjaudu sisään</h2>
                     <p>Tunnus: <br>
                         <input type="text" name="username">
@@ -36,7 +36,7 @@
             </div>
 
             <div class="col-6">
-                <form action="/newuser" method="POST">
+                <form action="/newuser" method="POST" onsubmit="return check(this)">
                     <h2>Luo uusi käyttäjätunnus</h2>
                     <p>Keksi itsellesi käyttäjätunnus: <br>
                         <input type="text" name="username">
@@ -53,12 +53,19 @@
         </div>
     </div>
 
-    <!-- nää scriptit ei toimi mun koneel vaikka JavaScript on allow -->
+    <!-- Javascript for checking login and new user credentials-->
     <script>
-        function tarkista(viesti) {
-            if (viesti!==null) {
-                alert(viesti);
+        function check(form) {
+            if (form.username.value.length > 100 || form.password.value.length > 100) {
+                alert("Käyttäjätunnus tai salasana on liian pitkä");
+                return false;
             }
+            if (form.username.value.length < 1 || form.password.value.length < 4) {
+                alert("Käyttäjätunnus tai salasana on liian lyhyt. Salasanan tulee olla ainakin 4 merkkiä.");
+                return false;
+            }
+
+            return true;
         }
     </script>
 
