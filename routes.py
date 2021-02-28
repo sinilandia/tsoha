@@ -125,6 +125,9 @@ def add_favorite():
 
 @app.route("/deletefavorite",methods=["POST"])
 def delete_favorite():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
+
     name = request.form["restaurant_name"]
     id = lounaat.fetch_restaurant_id(name)
 
