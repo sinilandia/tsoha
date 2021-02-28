@@ -40,6 +40,10 @@
             color:#92ABD1;
         }
 
+        .form-control {
+            margin: 5px;
+        }        
+
     </style>
 </head>
 
@@ -60,7 +64,7 @@
       {% for name, id in session.restaurants.items() %}
         <a href="/ravintola/{{ id }}"> {{ name }}</a> 
       {% endfor %}
-      <a href="/kirjautuminen">Kirjaudu</a>
+      <a href="/kirjautuminen">Oma sivu</a>
     </nav>
 </div>
 

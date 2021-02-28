@@ -20,9 +20,27 @@
       </p>
     </div>
 
+    <!--ADD RESTAURANT AS FAVORITE WHEN LOGGED IN-->
     <div class="col-6">  
-      <button type="button">Lisää suosikiksi</button>
+      <form action="/addfavorite" method="POST" onsubmit="return check(this)">
+        <h3><input type="submit" value="Lisää suosikiksi &#128077"></h3>
+        <input type="hidden" name="restaurant_id" value="{{ ravintola[0][0] }}">
+        <input type="hidden" name="restaurant_name" value="{{ ravintola[0][1] }}">
+        <input type="hidden" name="username" value="{{ session.username }}" required>
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+      </form>
     </div>
+
+    <!--JAVASCRIPT CHECK: IS USER LOGGED IN-->
+    <script>
+      function check(form) {
+          if (form.username.value.length < 1) {
+              alert("Kirjaudu sisään lisätäksesi lemppareita!");
+              return false;
+          }
+          return true;
+      }
+    </script>
 
     <div class="col-12">
         <p>    

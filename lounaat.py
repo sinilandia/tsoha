@@ -14,6 +14,12 @@ def fetch_restaurant_names():
         names[restaurant[1]] = restaurant[0]
     return names
 
+def fetch_restaurant_id(name):
+    sql = "SELECT id FROM ravintolat WHERE nimi=:name"
+    result = db.session.execute(sql, {"name":name})
+    id = result.fetchone()
+    return id[0]
+
 def hae_lounaat_tanaan():
     result = db.session.execute("SELECT * from lounaat WHERE pvm = CURRENT_DATE")
     lounaat_tanaan = result.fetchall()

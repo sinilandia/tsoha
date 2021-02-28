@@ -34,4 +34,40 @@ def kayttajan_ravintola_id(username):
         return 0
     else:
         return ravintola_id[0]
+
+def get_user_id(username):
+    sql = "SELECT id FROM kayttajat WHERE tunnus=:username"
+    result = db.session.execute(sql, {"username":username})
+    user_id = result.fetchone()
+    return user_id[0]        
+
+def add_favorite(username, restaurant_id):
+    user_id = get_user_id(username)
+
+    #check if restaurant is already in favorites
+    sql = "SELECT DISTINCT restaurant_id FROM favorites WHERE user_id=:user_id"
+    result = db.session.execute(sql, {"user_id":user_id})
+    restaurants = result.fetchall()
+    for restaurant in restaurants:
+        if (str(restaurant[0])==restaurant_id):
+            return False
+
+    #add restaurant into favorites
+    sql = "INSERT INTO favorites (user_id, restaurant_id) VALUES (:user_id, :restaurant_id)"
+    db.session.execute(sql, {"user_id":user_id, "restaurant_id":restaurant_id})
+    db.session.commit()
+    return True
+
+def get_favorites(username):
+    user_id = get_user_id(username)
+    sql = "SELECT R.nimi FROM ravintolat R, favorites F WHERE F.user_id=:user_id AND F.restaurant_id=R.id"
+    result = db.session.execute(sql, {"user_id":user_id})
+    favorites = result.fetchall()
+    return favorites
     
+def delete_favorite(username, restaurant_id):
+    user_id = get_user_id(username)
+    sql = "DELETE FROM favorites WHERE user_id=:user_id AND restaurant_id=:restaurant_id"
+    result = db.session.execute(sql, {"user_id":user_id, "restaurant_id":restaurant_id})
+    db.session.commit()
+    return True

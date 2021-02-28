@@ -4,20 +4,38 @@
 
 {% block content %}
 <body>
+    <!-- PAGE FOR LOGGED IN USER -->
     <div class="container">
       <div class="row">
         <div class="col-12">
             {% if session.username %}
-                <p>Olet kirjautunut nimellä {{ session.username }}</p>
+                <h2>Olet kirjautunut nimellä: {{ session.username }}</h2>
                 <a href="/logout">Kirjaudu ulos</a><br>
             {% if session.ravintola_id!=0 %}
                 <a href="/lunch">Lisää lounas</a>
             {% endif %}    
+  
+            {% if session.username %}
+                <h2>Omat suosikit:</h2>
+                {% if not favorites %}
+                    <p>Sinulla ei ole vielä yhtään suosikkiravintolaa. Lisää ravintola suosikiksi ravintolan sivulta.</p>
+                {% endif %}
 
+                {% for favorite in favorites %} 
+                    <form class="form-inline" action="/deletefavorite" method="POST">
+                        <label>{{ favorite[0] }}</label>
+                        <input class="form-control" type="submit" value="Poista suosikeista &#128078">
+                        <input type="hidden" name="restaurant_name" value="{{ favorite[0] }}">
+                        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+                    </form>
+                    <br>
+                {% endfor %}
+            {% endif %}
         </div>
       </div>  
     </div>     
 
+    <!-- PAGE FOR NOT LOGGED IN USER -->
     {% else %}
     <div class="container">
         <div class="row">    
@@ -25,12 +43,11 @@
                 <form action="/login" method="POST" onsubmit="return check(this)">
                     <h2>Kirjaudu sisään</h2>
                     <p>Tunnus: <br>
-                        <input type="text" name="username">
+                        <input type="text" name="username" required>
                     </p>
                     <p>Salasana: <br>
-                        <input type="password" name="password">
+                        <input type="password" name="password" required>
                     </p>
-
                     <input type="submit" value="Kirjaudu">
                 </form>
             </div>
@@ -39,10 +56,10 @@
                 <form action="/newuser" method="POST" onsubmit="return check(this)">
                     <h2>Luo uusi käyttäjätunnus</h2>
                     <p>Keksi itsellesi käyttäjätunnus: <br>
-                        <input type="text" name="username">
+                        <input type="text" name="username" required>
                     </p>
                     <p>Keksi mitä mainioin salasana: <br>
-                        <input type="password" name="password">
+                        <input type="password" name="password" required>
                     </p>
 
                     <input type="submit" value="Luo uusi tunnus">
