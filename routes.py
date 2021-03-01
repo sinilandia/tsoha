@@ -11,10 +11,10 @@ from os import urandom
 
 @app.route("/")
 def index():
-    ravintolat = lounaat.hae_ravintolat()
+    restaurants = lounaat.hae_ravintolat()
     session["restaurants"] = lounaat.fetch_restaurant_names()
-    lounaat_tanaan= lounaat.hae_lounaat_tanaan()
-    return render_template("index.html",ravintolat=ravintolat, lounaat=lounaat_tanaan)
+    lunches_today = lounaat.hae_lounaat_tanaan()
+    return render_template("index.html",restaurants=restaurants, lunches=lunches_today)
 
 @app.route("/ravintola/<int:id>")
 def ravintolan_sivu(id):

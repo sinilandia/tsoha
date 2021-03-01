@@ -11,17 +11,17 @@
       <p>
      
         <hr>
-        {% for ravintola in ravintolat %}
-          {{ ravintola [1] }} <br>
-          {{ ravintola [2] }} <br>
-          {{ ravintola [3] }} <br>
-          {{ ravintola [4] }} <br>
-          Lounaan hinta: {{ ravintola [5] }} <br>
+        {% for restaurant in restaurants %}
+          {{ restaurant [1] }} <br>
+          {{ restaurant [2] }} <br>
+          {{ restaurant [3] }} <br>
+          {{ restaurant [4] }} <br>
+          Lounaan hinta: {{ restaurant [5] }} <br>
         
-          {% for lounas in lounaat %}
-            {% if lounas [4]==ravintola [0] %}
-              {{ lounas [1] }} <br>
-              Peukut: {{ lounas [3] }}<br>  
+          {% for lunch in lunches %}
+            {% if lunch [4]==restaurant [0] %}
+              {{ lunch [1] }} <br>
+              Peukut: {{ lunch [3] }}<br>  
             {% endif %}  
           {% endfor %}  
         <hr>
