@@ -2,7 +2,7 @@
 {% extends "layout.html" %}
 
 
-{% block title %}<title>{{ ravintola [0][1] }}</title>{% endblock %}
+{% block title %}<title>{{ restaurant [0][1] }}</title>{% endblock %}
 
 {% block content %}  
 <body>
@@ -10,12 +10,12 @@
   <div class="row">
     <div class="col-6">
       <p>
-        <h2> {{ ravintola [0][1] }} </h2>
+        <h2> {{ restaurant [0][1] }} </h2>
         <p class="info">
-          Osoite: {{ ravintola [0][2] }} <br>
-          Puh: {{ ravintola [0][3]}} <br>
-          Email: {{ ravintola [0][4]}} <br>
-          Lounaan hinta: {{ ravintola [0][5]}} <br>  
+          Osoite: {{ restaurant [0][2] }} <br>
+          Puh: {{ restaurant [0][3]}} <br>
+          Email: {{ restaurant [0][4]}} <br>
+          Lounaan hinta: {{ restaurant [0][5]}} <br>  
         </p>
       </p>
     </div>
@@ -24,8 +24,8 @@
     <div class="col-6">  
       <form action="/addfavorite" method="POST" onsubmit="return check(this)">
         <h3><input type="submit" value="Lisää suosikiksi &#128077"></h3>
-        <input type="hidden" name="restaurant_id" value="{{ ravintola[0][0] }}">
-        <input type="hidden" name="restaurant_name" value="{{ ravintola[0][1] }}">
+        <input type="hidden" name="restaurant_id" value="{{ restaurant[0][0] }}">
+        <input type="hidden" name="restaurant_name" value="{{ restaurant[0][1] }}">
         <input type="hidden" name="username" value="{{ session.username }}" required>
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
       </form>
@@ -44,37 +44,37 @@
 
     <div class="col-12">
         <p>    
-          <h4>Tänään {{ tanaan }}</h4>
+          <h4>Tänään {{ today }}</h4>
           {% for lounas in lounaat_tanaan %}              
             {{ lounas [1] }} <br>
           {% endfor %}  
 
-          <h4>Huomenna {{huomenna}}</h4>
+          <h4>Huomenna {{tomorrow}}</h4>
           {% for lounas in lounaat_huomenna %}
               {{ lounas [1] }}<br>
           {% endfor %}  
 
-          <h4>Maanantai {{maanantai}}</h4>
+          <h4>Maanantai {{tomorrow}}</h4>
           {% for lounas in lounaat_maanantai %}
               {{ lounas [1] }}<br>
           {% endfor %}
 
-          <h4>Tiistai {{tiistai}}</h4>
+          <h4>Tiistai {{tuesday}}</h4>
           {% for lounas in lounaat_tiistai %}
               {{ lounas [1] }}<br> 
           {% endfor %}
 
-          <h4>Keskiviikko {{keskiviikko}}</h4>
+          <h4>Keskiviikko {{wednesday}}</h4>
           {% for lounas in lounaat_keskiviikko %}
             {{ lounas [1] }}<br>
           {% endfor %}
    
-          <h4>Torstai {{torstai}}</h4>
+          <h4>Torstai {{thursday}}</h4>
           {% for lounas in lounaat_torstai %}
               {{ lounas [1] }}<br>
           {% endfor %}
 
-          <h4>Perjantai {{perjantai}}</h4>
+          <h4>Perjantai {{friday}}</h4>
           {% for lounas in lounaat_perjantai %}
               {{ lounas [1] }}<br>
           {% endfor %}

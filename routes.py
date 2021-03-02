@@ -16,16 +16,16 @@ def index():
     lunches_today = lounaat.hae_lounaat_tanaan()
     return render_template("index.html",restaurants=restaurants, lunches=lunches_today)
 
-@app.route("/ravintola/<int:id>")
-def ravintolan_sivu(id):
-    ravintola = lounaat.hae_ravintola(id)
+@app.route("/restaurant/<int:id>")
+def restaurant(id):
+    restaurant = lounaat.hae_ravintola(id)
 
     lounaat_tanaan,lounaat_huomenna,lounaat_maanantai,lounaat_tiistai,lounaat_keskiviikko,lounaat_torstai,lounaat_perjantai = lounaat.hae_ravintolan_lounaat(id)
 
-    tanaan,huomenna,maanantai,tiistai,keskiviikko,torstai,perjantai=lounaat.hae_paivat()
+    today,tomorrow,monday,tuesday,wednesday,thursday,friday=lounaat.hae_paivat()
 
-    return render_template("ravintola.html", id=id, 
-    ravintola=ravintola, 
+    return render_template("restaurant.html", id=id, 
+    restaurant=restaurant, 
     lounaat_tanaan=lounaat_tanaan,
     lounaat_huomenna=lounaat_huomenna,
     lounaat_maanantai=lounaat_maanantai,
@@ -33,16 +33,16 @@ def ravintolan_sivu(id):
     lounaat_keskiviikko=lounaat_keskiviikko,
     lounaat_torstai=lounaat_torstai,
     lounaat_perjantai=lounaat_perjantai, 
-    tanaan=tanaan, 
-    huomenna=huomenna,
-    maanantai=maanantai,
-    tiistai=tiistai,
-    keskiviikko=keskiviikko,
-    torstai=torstai,
-    perjantai=perjantai)
+    today=today, 
+    tomorrow=tomorrow,
+    monday=monday,
+    tuesday=tuesday,
+    wednesday=wednesday,
+    thursday=thursday,
+    friday=friday)
 
-@app.route("/kirjautuminen")
-def kirjautuminen():
+@app.route("/user")
+def user():
     favorites = []
     if "username" in session:
         username = session["username"]
@@ -53,15 +53,16 @@ def kirjautuminen():
 def login():
     username = request.form["username"]
     password = request.form["password"]
-    viesti = users.onko_oikein(username,password)
+    message = users.onko_oikein(username,password)
         
-    if viesti == "Kirjautuminen onnistui":            
+    if message == "Kirjautuminen onnistui":            
         session["username"] = username
         session["ravintola_id"] = users.kayttajan_ravintola_id(session["username"])
         session["csrf_token"] = os.urandom(16).hex()
-        return redirect("/kirjautuminen")
+        flash(message,'success')
     else:
-        return render_template("error.html", viesti=viesti)   
+        flash(message, 'danger')
+    return redirect("/user")
 
 @app.route("/newuser",methods=["POST"])
 def uusi_kayttaja():

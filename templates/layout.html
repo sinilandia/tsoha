@@ -62,9 +62,9 @@
       
       <!-- populate navigation pane with restaurants -->
       {% for name, id in session.restaurants.items() %}
-        <a href="/ravintola/{{ id }}"> {{ name }}</a> 
+        <a href="/restaurant/{{ id }}"> {{ name }}</a> 
       {% endfor %}
-      <a href="/kirjautuminen">Oma sivu</a>
+      <a href="/user">Oma sivu</a>
     </nav>
 </div>
 
