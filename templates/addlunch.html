@@ -7,17 +7,26 @@
     <div class="container">
         <h1>Lisää lounas</h1>
     
-        <form action="/addlunch" method="POST">
-            <label for="lounas">Lounas:</label> <br>
-                <input type="text" id="lounas" name="lounas"><br>
+        <form action="/addlunch" method="POST" id="addlunch" onsubmit="return check(this)">
+            <label>Lounas:</label> <br>
+                <textarea name="lounas" form="addlunch" required></textarea><br>
             
             <label for="paivamaara">Päivämäärä:</label> <br>
-                <input type="date" id="paivamaara" name="paivamaara">
+                <input type="date" id="paivamaara" name="paivamaara" required>
             <input type="submit" value="Lisää lounas">
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </form>
     </div>
 
-    <!--TODO: ADD JAVASCRIPT CHECK-->
+    <script>
+        function check(form) {
+            if (form.lounas.value.length < 5 || form.lounas.value.length > 150) {
+                alert("Lounas on liian lyhyt tai pitkä. Merkkejä saa olla 5-150.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </body>        
 {% endblock %}

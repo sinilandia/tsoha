@@ -65,7 +65,7 @@ def login():
     return redirect("/user")
 
 @app.route("/newuser",methods=["POST"])
-def uusi_kayttaja():
+def new_user():
     username = request.form["username"]
     password = request.form["password"]
     if (users.luo_kayttaja(username,password)):
@@ -73,7 +73,7 @@ def uusi_kayttaja():
         flash(message, 'success')
     else: 
         flash("Tiliä ei voitu luoda. Käyttäjätunnus on jo käytössä.", 'danger')  
-    return redirect("/kirjautuminen")
+    return redirect("/user")
 
 @app.route("/logout")
 def logout():
@@ -89,23 +89,24 @@ def lunch():
 
 @app.route("/addlunch",methods=["POST"])
 def add_lunch():
-    ravintola_id = session["ravintola_id"]
-    nimi = request.form["lounas"]
-    pvm = request.form["paivamaara"]
+    restaurant_id = session["ravintola_id"]
+    name = request.form["lounas"]
+    day = request.form["paivamaara"]
     if session["csrf_token"] != request.form["csrf_token"]:
         abort(403)
 
-    if len(nimi) < 1 or len(nimi)>150:
-        return render_template("error.html", viesti="Lounaan nimi ei voi olla tyhjä eikä yli 150 merkkiä")
-    if pvm=='':
-        return render_template("error.html", viesti="Lounaalta puuttuu päivämäärä")
-    if ravintola_id==0:
-        return render_template("error.html", viesti="Sinulla ei ole oikeuksia lisätä lounaita.")
-    if ravintola_id!=0: 
-        lounaat.lisaa_lounas(nimi, pvm, ravintola_id)
-        return redirect("/lunch")
+    if len(name) < 1 or len(name)>150:
+        flash("Lounaan nimi ei voi olla tyhjä eikä yli 150 merkkiä", 'danger')
+    elif day=='':
+        flash("Lounaalta puuttuu päivämäärä", 'danger') 
+    elif restaurant_id==0:
+        flash("Sinulla ei ole oikeuksia lisätä lounaita.", 'danger') 
+    elif restaurant_id!=0:  
+        lounaat.lisaa_lounas(name, day, restaurant_id)
+        flash("Lounaan lisäys onnistui", 'success')
     else:
-        return render_template("error.html", viesti="Lounaan lisäys ei onnistunut")
+        flash("Lounaan lisäys ei onnistunut.", 'danger') 
+    return redirect("/lunch")
 
 @app.route("/addfavorite",methods=["POST"])
 def add_favorite():
