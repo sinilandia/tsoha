@@ -43,6 +43,7 @@
     </script>
 
     <div class="col-12">
+        <hr>
         <p>    
           <h4>Tänään {{ today }}</h4>
           {% for lounas in lounaat_tanaan %}              
@@ -53,6 +54,8 @@
           {% for lounas in lounaat_huomenna %}
               {{ lounas [1] }}<br>
           {% endfor %}  
+
+          <hr>
 
           <h4>Maanantai {{tomorrow}}</h4>
           {% for lounas in lounaat_maanantai %}
