@@ -82,3 +82,20 @@ def lisaa_lounas(nimi, pvm, ravintola_id):
     result = db.session.execute(sql, {"nimi":nimi, "pvm":pvm, "ravintola_id":ravintola_id})
     db.session.commit()
     return True
+
+def fetch_reviews(restaurant_id):
+    sql = "SELECT kayttajat.tunnus, R.star, R.title, R.review, R.today FROM reviews R INNER JOIN kayttajat ON kayttajat.id=R.user_id WHERE R.restaurant_id=:restaurant_id"
+    result = db.session.execute(sql,{"restaurant_id":restaurant_id})
+    reviews = result.fetchall()
+    return reviews    
+
+# TÄMÄ OSIO ETUSIVULLE KARUSELLIKSI?
+# def fetch_reviews(restaurant_id):
+#     sql = "SELECT R.user_id, ravintolat.nimi, R.star, R.title, R.review, R.today FROM reviews R INNER JOIN ravintolat ON ravintolat.id=R.restaurant_id WHERE R.restaurant_id=:restaurant_id"
+#     result = db.session.execute(sql,{"restaurant_id":restaurant_id})
+#     reviews = result.fetchall()
+#     return reviews
+
+
+
+        

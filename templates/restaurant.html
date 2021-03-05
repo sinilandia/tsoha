@@ -20,7 +20,7 @@
       </p>
     </div>
 
-    <!--ADD RESTAURANT AS FAVORITE WHEN LOGGED IN-->
+    <!-- ADD RESTAURANT AS FAVORITE -->
     <div class="col-6">  
       <form action="/addfavorite" method="POST" onsubmit="return check(this)">
         <h3><input type="submit" value="Lisää suosikiksi &#128077"></h3>
@@ -30,17 +30,6 @@
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
       </form>
     </div>
-
-    <!--JAVASCRIPT CHECK: IS USER LOGGED IN-->
-    <script>
-      function check(form) {
-          if (form.username.value.length < 1) {
-              alert("Kirjaudu sisään lisätäksesi lemppareita!");
-              return false;
-          }
-          return true;
-      }
-    </script>
 
     <div class="col-12">
         <hr>
@@ -82,8 +71,81 @@
               {{ lounas [1] }}<br>
           {% endfor %}
        </p>
+      <hr> 
     </div>
+
+    <div class="col-12">
+      <div>
+        <p>
+        <h2>Lisää oma arvio</h2>
+        <form action="/addreview" method="POST" id="addreview" onsubmit="return check(this)">
+  
+          <div>Tähdet</div>
+          <div class="rating">
+            <input id="star5" name="star" type="radio" value="5" class="radio-btn hide" />
+            <label for="star5">☆</label>
+            <input id="star4" name="star" type="radio" value="4" class="radio-btn hide" />
+            <label for="star4">☆</label>
+            <input id="star3" name="star" type="radio" value="3" class="radio-btn hide" />
+            <label for="star3">☆</label>
+            <input id="star2" name="star" type="radio" value="2" class="radio-btn hide" />
+            <label for="star2">☆</label>
+            <input id="star1" name="star" type="radio" value="1" class="radio-btn hide" />
+            <label for="star1">☆</label>
+          </div>
+          <div class="clear"></div>
+          
+          <p>Otsikko</p>
+          <input type="text" name="title" form="addreview" required></textarea><br>
+          <p>Arvio</p>
+          <textarea name="review" form="addreview" required></textarea><br>
+          <input type="submit" value="Lisää arvio">
+          <input type="hidden" name="restaurant_id" value="{{ restaurant[0][0] }}">
+          <input type="hidden" name="username" value="{{ session.username }}">
+          <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+        </form>
+      </p>
+      </div>
+      
+      <!--JAVASCRIPT CHECK: IS USER LOGGED IN-->
+    <script>
+      function check(form) {
+          if (form.username.value.length < 1) {
+              alert("Kirjaudu sisään ensin!");
+              return false;
+          }
+
+          if (form.star.value < 1) {
+            alert("Tähtiluokitus puuttuu!");
+            return false;
+          }
+
+          return true;
+      }
+    </script>
+
+      <hr>
+      <p>
+      <h2>Käyttäjäarviot TODO: Lisää ka</h2>
+      
+        {% for review in reviews %}
+          <p>{{ review[4] }}<br>
+          Käyttäjätunnus: {{ review[0] }}<br>
+          Tähdet: {{ review[1] }}<br>
+          <h4>{{ review[2] }}</h4>
+          {{ review[3] }}</p>
+          <hr>
+        {% endfor %}
+
+      </div>
+    </p>
+
+    </div>
+
   </div>     
 </div>
+
+
+
 </body>   
 {% endblock %}

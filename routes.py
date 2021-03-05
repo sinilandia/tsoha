@@ -24,6 +24,8 @@ def restaurant(id):
 
     today,tomorrow,monday,tuesday,wednesday,thursday,friday=lounaat.hae_paivat()
 
+    reviews = lounaat.fetch_reviews(id)
+
     return render_template("restaurant.html", id=id, 
     restaurant=restaurant, 
     lounaat_tanaan=lounaat_tanaan,
@@ -39,7 +41,8 @@ def restaurant(id):
     tuesday=tuesday,
     wednesday=wednesday,
     thursday=thursday,
-    friday=friday)
+    friday=friday,
+    reviews=reviews)
 
 @app.route("/user")
 def user():
@@ -137,5 +140,24 @@ def delete_favorite():
         flash(name + " poistettu lemppareista", 'success')
     else:
         flash("Poistaminen ei onnistunut.", 'danger')
+
+    return redirect(request.referrer)
+
+@app.route("/addreview",methods=["POST"])
+def add_review():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
+
+    username = session["username"]
+    restaurant_id = request.form["restaurant_id"]
+    star = request.form["star"]
+    title = request.form["title"]
+    review = request.form["review"]
+
+    if (users.add_review(username,restaurant_id, star, title, review)):
+        message = "Arviosi on lisätty!"
+        flash(message, 'success')
+    else: 
+        flash("Arvion lisääminen ei onnistunut.",'danger')  
 
     return redirect(request.referrer)

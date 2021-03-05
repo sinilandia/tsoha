@@ -44,6 +44,50 @@
             margin: 5px;
         }        
 
+        .hide {
+            display: none;
+        }
+
+        .clear {
+            float: none;
+            clear: both;
+        }
+
+        .rating {
+            width: 90px;
+            unicode-bidi: bidi-override;
+            direction: rtl;
+            text-align: center;
+            position: relative;
+        }
+
+        .rating > label {
+            float: right;
+            display: inline;
+            padding: 0;
+            margin: 0;
+            position: relative;
+            width: 1.1em;
+            cursor: pointer;
+            color: #92ABD1;
+        }
+
+        .rating > label:hover,
+        .rating > label:hover ~ label,
+        .rating > input.radio-btn:checked ~ label {
+            color: transparent;
+        }
+
+        .rating > label:hover:before,
+        .rating > label:hover ~ label:before,
+        .rating > input.radio-btn:checked ~ label:before,
+        .rating > input.radio-btn:checked ~ label:before {
+            content: "\2605";
+            position: absolute;
+            left: 0;
+            color: #F7CAC9;
+        }
+
     </style>
 </head>
 
@@ -74,7 +118,7 @@
 
 <div class="container">
     <footer class="navbar navbar-light bg-light">
-        <p>Lounas Larussa päivitetty viimeksi 27.2.2021</p>
+        <p>Lounas Larussa päivitetty viimeksi 4.3.2021</p>
         <p><a href="mailto:aisinilandia@gmail.com">aisinilandia(a)gmail.com</a></p>
     </footer>
 </div>

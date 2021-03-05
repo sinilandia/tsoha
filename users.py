@@ -71,3 +71,10 @@ def delete_favorite(username, restaurant_id):
     result = db.session.execute(sql, {"user_id":user_id, "restaurant_id":restaurant_id})
     db.session.commit()
     return True
+
+def add_review(username,restaurant_id, star, title, review):
+    user_id = get_user_id(username)
+    sql = "INSERT INTO reviews (user_id, restaurant_id, star, title, review) VALUES (:user_id, :restaurant_id, :star, :title, :review)"
+    db.session.execute(sql, {"user_id":user_id, "restaurant_id":restaurant_id, "star":star, "title":title, "review":review})
+    db.session.commit()
+    return True
