@@ -5,17 +5,76 @@
 {% block content %}
 <body>
     <div class="container">
-        <h1>Lisää lounas</h1>
-    
-        <form action="/addlunch" method="POST" id="addlunch" onsubmit="return check(this)">
-            <label>Lounas:</label> <br>
-                <textarea name="lounas" form="addlunch" required></textarea><br>
+        <div class="row">
+            <div class="col-12">
+                <h1>Lisää lounas</h1>
             
-            <label for="paivamaara">Päivämäärä:</label> <br>
-                <input type="date" id="paivamaara" name="paivamaara" required>
-            <input type="submit" value="Lisää lounas">
-            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-        </form>
+                <form action="/addlunch" method="POST" id="addlunch" onsubmit="return check(this)">
+                    <label>Lounas:</label> <br>
+                        <textarea name="lounas" form="addlunch" required></textarea><br>
+                    
+                    <label for="paivamaara">Päivämäärä:</label> <br>
+                        <input type="date" min="2021-03-01" max="2021-12-31" value="2021-03-01" id="paivamaara" name="paivamaara" required>
+                    <input type="submit" value="Lisää lounas">
+                    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+                </form>
+            </div>
+
+  <!-- LUNCHES OF THE WEEK IN MY RESTAURANT -->
+        <div class="col-12">
+            <hr>
+
+            <h4>Maanantai {{monday}}</h4>
+            {% for lounas in lounaat_maanantai %}
+                <form class="form-inline" action="/deletelunch" method="POST">
+                    <label>{{ lounas[1] }}</label>
+                    <input class="form-control" type="submit" value="Poista lounas">
+                    <input type="hidden" name="lunch_id" value="{{ lounas[0] }}">
+                    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+                </form>
+            {% endfor %}
+
+            <h4>Tiistai {{tuesday}}</h4>
+            {% for lounas in lounaat_tiistai %}
+                <form class="form-inline" action="/deletelunch" method="POST">
+                    <label>{{ lounas[1] }}</label>
+                    <input class="form-control" type="submit" value="Poista lounas">
+                    <input type="hidden" name="lunch_id" value="{{ lounas[0] }}">
+                    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+                </form>
+            {% endfor %}
+
+            <h4>Keskiviikko {{wednesday}}</h4>
+            {% for lounas in lounaat_keskiviikko %}
+                <form class="form-inline" action="/deletelunch" method="POST">
+                    <label>{{ lounas[1] }}</label>
+                    <input class="form-control" type="submit" value="Poista lounas">
+                    <input type="hidden" name="lunch_id" value="{{ lounas[0] }}">
+                    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+                </form>
+            {% endfor %}
+
+            <h4>Torstai {{thursday}}</h4>
+            {% for lounas in lounaat_torstai %}
+                <form class="form-inline" action="/deletelunch" method="POST">
+                    <label>{{ lounas[1] }}</label>
+                    <input class="form-control" type="submit" value="Poista lounas">
+                    <input type="hidden" name="lunch_id" value="{{ lounas[0] }}">
+                    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+                </form>
+            {% endfor %}
+
+            <h4>Perjantai {{friday}}</h4>
+            {% for lounas in lounaat_perjantai %}
+                <form class="form-inline" action="/deletelunch" method="POST">
+                    <label>{{ lounas[1] }}</label>
+                    <input class="form-control" type="submit" value="Poista lounas">
+                    <input type="hidden" name="lunch_id" value="{{ lounas[0] }}">
+                    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+                </form>
+            {% endfor %} 
+            <hr>
+        </div>  
     </div>
 
     <script>
@@ -28,5 +87,221 @@
             return true;
         }
     </script>
+
+<!-- LUNCH CALENDAR -->
+    <div id="calendar-wrap">
+        <header>
+            <h1>December 2017</h1>
+        </header>
+        <div id="calendar">
+            <ul class="weekdays">      
+                <li>Monday</li>
+                <li>Tuesday</li>
+                <li>Wednesday</li>
+                <li>Thursday</li>
+                <li>Friday</li>           
+            </ul>
+
+            <!-- Days from previous month -->
+
+            <ul class="days">
+                <li class="day other-month">
+                    <div class="date">27</div>    					
+                </li>
+                <li class="day other-month">
+                    <div class="date">28</div>
+                    <div class="event">
+                        <div class="event-desc">
+                            HTML 5 lecture with Brad Traversy from Eduonix
+                        </div>
+                        
+                    </div>    					
+                </li>
+                <li class="day other-month">
+                    <div class="date">29</div>    					
+                </li>
+                <li class="day other-month">
+                    <div class="date">30</div>    					
+                </li>
+                <li class="day other-month">
+                    <div class="date">31</div>    					
+                </li>
+
+                <!-- Days in current month -->
+
+                <li class="day">
+                    <div class="date">1</div>    					
+                </li>
+                <li class="day">
+                    <div class="date">2</div>
+                    <div class="event">
+                        <div class="event-desc">
+                            Career development @ Community College room #402
+                        </div>
+                    </div>     					
+                </li>
+            </ul>
+
+                <!-- Row #2 -->
+
+            <ul class="days">
+                <li class="day">
+                    <div class="date">3</div>    					
+                </li>
+                <li class="day">
+                    <div class="date">4</div>    					
+                </li>
+                <li class="day">
+                    <div class="date">5</div>    					
+                </li>
+                <li class="day">
+                    <div class="date">6</div>    					
+                </li>
+                <li class="day">
+                    <div class="date">7</div>
+                    <div class="event">
+                        <div class="event-desc">
+                            Group Project meetup
+                        </div>
+                    </div>     					
+                </li>
+                <li class="day">
+                    <div class="date">8</div>    					
+                </li>
+                <li class="day">
+                    <div class="date">9</div>    					
+                </li>
+            </ul>
+
+                <!-- Row #3 -->
+
+            <ul class="days">
+                <li class="day">
+                    <div class="date">10</div>    					
+                </li>
+                <li class="day">
+                    <div class="date">11</div>    					
+                </li>
+                <li class="day">
+                    <div class="date">12</div>    					
+                </li>
+                <li class="day">
+                    <div class="date">13</div>    					
+                </li>
+                <li class="day">
+                    <div class="date">14</div><div class="event">
+                        <div class="event-desc">
+                            Board Meeting
+                        </div>
+                        <div class="event-time">
+                            1:00pm to 3:00pm
+                        </div>
+                    </div>     					
+                </li>
+                <li class="day">
+                    <div class="date">15</div>    					
+                </li>
+                <li class="day">
+                    <div class="date">16</div>    					
+                </li>
+            </ul>
+
+                <!-- Row #4 -->
+
+            <ul class="days">
+                <li class="day">
+                    <div class="date">17</div>    					
+                </li>
+                <li class="day">
+                    <div class="date">18</div>    					
+                </li>
+                <li class="day">
+                    <div class="date">19</div>    					
+                </li>
+                <li class="day">
+                    <div class="date">20</div>    					
+                </li>
+                <li class="day">
+                    <div class="date">21</div>    					
+                </li>
+                <li class="day">
+                    <div class="date">22</div>
+                    <div class="event">
+                        <div class="event-desc">
+                            Conference call
+                        </div>
+                        <div class="event-time">
+                            9:00am to 12:00pm
+                        </div>
+                    </div>     					
+                </li>
+                <li class="day">
+                    <div class="date">23</div>    					
+                </li>
+            </ul>
+
+                    <!-- Row #5 -->
+
+            <ul class="days">
+                <li class="day">
+                    <div class="date">24</div>    					
+                </li>
+                <li class="day">
+                    <div class="date">25</div>
+                    <div class="event">
+                        <div class="event-desc">
+                            Conference Call
+                        </div>
+                        <div class="event-time">
+                            1:00pm to 3:00pm
+                        </div>
+                    </div>     					
+                </li>
+                <li class="day">
+                    <div class="date">26</div>    					
+                </li>
+                <li class="day">
+                    <div class="date">27</div>    					
+                </li>
+                <li class="day">
+                    <div class="date">28</div>    					
+                </li>
+                <li class="day">
+                    <div class="date">29</div>    					
+                </li>
+                <li class="day">
+                    <div class="date">30</div>    					
+                </li>
+            </ul>
+
+            <!-- Row #6 -->
+
+            <ul class="days">
+                <li class="day">
+                    <div class="date">31</div>    					
+                </li>
+                <li class="day other-month">
+                    <div class="date">1</div> <!-- Next Month -->    					
+                </li>
+                <li class="day other-month">
+                    <div class="date">2</div>    					
+                </li>
+                <li class="day other-month">
+                    <div class="date">3</div>    					
+                </li>
+                <li class="day other-month">
+                    <div class="date">4</div>    					
+                </li>
+                <li class="day other-month">
+                    <div class="date">5</div>    					
+                </li>
+                <li class="day other-month">
+                    <div class="date">6</div>    					
+                </li>
+            </ul>
+
+        </div><!-- /. calendar -->
+    </div><!-- /. wrap -->
+
 </body>        
 {% endblock %}

@@ -7,21 +7,20 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <h1>Tervetuloa nauttimaan Laruun!</h1>
+      <h2>Tervetuloa nauttimaan Laruun!</h2>
       <p>
      
         <hr>
         {% for restaurant in restaurants %}
-          {{ restaurant [1] }} <br>
+          <h4>{{ restaurant [1] }}</h4>
           {{ restaurant [2] }} <br>
           {{ restaurant [3] }} <br>
           {{ restaurant [4] }} <br>
-          Lounaan hinta: {{ restaurant [5] }} <br>
+          Lounaan hinta: {{ restaurant [5] }} 
         
           {% for lunch in lunches %}
             {% if lunch [4]==restaurant [0] %}
-              {{ lunch [1] }} <br>
-              Peukut: {{ lunch [3] }}<br>  
+              <h5>{{ lunch [1] }}</h5> <br>
             {% endif %}  
           {% endfor %}  
         <hr>

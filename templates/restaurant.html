@@ -31,6 +31,7 @@
       </form>
     </div>
 
+    <!-- LUNCHES -->
     <div class="col-12">
         <hr>
         <p>    
@@ -46,7 +47,7 @@
 
           <hr>
 
-          <h4>Maanantai {{tomorrow}}</h4>
+          <h4>Maanantai {{monday}}</h4>
           {% for lounas in lounaat_maanantai %}
               {{ lounas [1] }}<br>
           {% endfor %}
@@ -74,6 +75,7 @@
       <hr> 
     </div>
 
+    <!-- ADD USER REVIEW -->
     <div class="col-12">
       <div>
         <p>
@@ -124,14 +126,16 @@
       }
     </script>
 
+<!-- USER REVIEWS -->
+
       <hr>
       <p>
-      <h2>Käyttäjäarviot TODO: Lisää ka</h2>
+      <h2>Käyttäjäarviot ☆{{ average[0] }}☆</h2>
       
         {% for review in reviews %}
           <p>{{ review[4] }}<br>
           Käyttäjätunnus: {{ review[0] }}<br>
-          Tähdet: {{ review[1] }}<br>
+          ☆: {{ review[1] }} <br>
           <h4>{{ review[2] }}</h4>
           {{ review[3] }}</p>
           <hr>
@@ -144,8 +148,5 @@
 
   </div>     
 </div>
-
-
-
 </body>   
 {% endblock %}

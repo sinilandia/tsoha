@@ -7,8 +7,6 @@ from werkzeug.security import check_password_hash, generate_password_hash
 import os
 from os import urandom
 
-
-
 @app.route("/")
 def index():
     restaurants = lounaat.hae_ravintolat()
@@ -25,6 +23,7 @@ def restaurant(id):
     today,tomorrow,monday,tuesday,wednesday,thursday,friday=lounaat.hae_paivat()
 
     reviews = lounaat.fetch_reviews(id)
+    average = lounaat.restaurant_average(id)
 
     return render_template("restaurant.html", id=id, 
     restaurant=restaurant, 
@@ -42,7 +41,8 @@ def restaurant(id):
     wednesday=wednesday,
     thursday=thursday,
     friday=friday,
-    reviews=reviews)
+    reviews=reviews,
+    average=average)
 
 @app.route("/user")
 def user():
@@ -56,8 +56,7 @@ def user():
 def login():
     username = request.form["username"]
     password = request.form["password"]
-    message = users.onko_oikein(username,password)
-        
+    message = users.onko_oikein(username,password)  
     if message == "Kirjautuminen onnistui":            
         session["username"] = username
         session["ravintola_id"] = users.kayttajan_ravintola_id(session["username"])
@@ -80,15 +79,40 @@ def new_user():
 
 @app.route("/logout")
 def logout():
-    flash('Kirjauduit ulos.', 'success')
-    del session["username"]
-    del session["ravintola_id"]
-    del session["csrf_token"] 
-    return redirect("/")   
+    try: 
+        flash('Kirjauduit ulos.', 'success')
+        del session["username"]
+        del session["ravintola_id"]
+        del session["csrf_token"] 
+        return redirect("/")   
+    except:
+        flash('Et ole kirjautunut sisään etkä täten voi kirjautua ulos.', 'danger')
+        return redirect("/user")
 
 @app.route("/lunch")
 def lunch():
-    return render_template("addlunch.html")
+    id = session["ravintola_id"]
+    try:
+        lounaat_tanaan,lounaat_huomenna,lounaat_maanantai,lounaat_tiistai,lounaat_keskiviikko,lounaat_torstai,lounaat_perjantai = lounaat.hae_ravintolan_lounaat(id)
+        today,tomorrow,monday,tuesday,wednesday,thursday,friday=lounaat.hae_paivat()
+        return render_template("addlunch.html", 
+        lounaat_tanaan=lounaat_tanaan,
+        lounaat_huomenna=lounaat_huomenna,
+        lounaat_maanantai=lounaat_maanantai,
+        lounaat_tiistai=lounaat_tiistai,
+        lounaat_keskiviikko=lounaat_keskiviikko,
+        lounaat_torstai=lounaat_torstai,
+        lounaat_perjantai=lounaat_perjantai, 
+        today=today, 
+        tomorrow=tomorrow,
+        monday=monday,
+        tuesday=tuesday,
+        wednesday=wednesday,
+        thursday=thursday,
+        friday=friday,)
+    except:    
+        pass
+    
 
 @app.route("/addlunch",methods=["POST"])
 def add_lunch():
@@ -109,7 +133,22 @@ def add_lunch():
         flash("Lounaan lisäys onnistui", 'success')
     else:
         flash("Lounaan lisäys ei onnistunut.", 'danger') 
+
     return redirect("/lunch")
+
+@app.route("/deletelunch",methods=["POST"])
+def delete_lunch():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
+
+    lunch_id = request.form["lunch_id"]
+
+    if (lounaat.delete_lunch(lunch_id)):
+        flash("Lounas poistettu.", 'success')
+    else:
+        flash("Poistaminen ei onnistunut.", 'danger')
+
+    return redirect(request.referrer)
 
 @app.route("/addfavorite",methods=["POST"])
 def add_favorite():
@@ -155,8 +194,7 @@ def add_review():
     review = request.form["review"]
 
     if (users.add_review(username,restaurant_id, star, title, review)):
-        message = "Arviosi on lisätty!"
-        flash(message, 'success')
+        flash("Arviosi on lisätty!", 'success')
     else: 
         flash("Arvion lisääminen ei onnistunut.",'danger')  
 

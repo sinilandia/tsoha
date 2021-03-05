@@ -83,11 +83,24 @@ def lisaa_lounas(nimi, pvm, ravintola_id):
     db.session.commit()
     return True
 
+def delete_lunch(id):
+    sql = "DELETE FROM lounaat WHERE id=:id"
+    result = db.session.execute(sql, {"id":id})
+    db.session.commit()
+    return True
+
 def fetch_reviews(restaurant_id):
     sql = "SELECT kayttajat.tunnus, R.star, R.title, R.review, R.today FROM reviews R INNER JOIN kayttajat ON kayttajat.id=R.user_id WHERE R.restaurant_id=:restaurant_id"
     result = db.session.execute(sql,{"restaurant_id":restaurant_id})
     reviews = result.fetchall()
     return reviews    
+
+def restaurant_average(restaurant_id):
+    sql = "SELECT AVG(star)::numeric(10,2) FROM reviews WHERE restaurant_id=:restaurant_id"
+    result = db.session.execute(sql, {"restaurant_id":restaurant_id})
+    average = result.fetchone()
+    return average
+
 
 # TÄMÄ OSIO ETUSIVULLE KARUSELLIKSI?
 # def fetch_reviews(restaurant_id):
