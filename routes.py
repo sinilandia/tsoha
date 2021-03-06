@@ -1,5 +1,5 @@
 from app import app
-import lounaat
+import lunches
 import users
 from flask import redirect, render_template, request, session, flash, url_for
 from datetime import date, datetime, timedelta
@@ -9,31 +9,31 @@ from os import urandom
 
 @app.route("/")
 def index():
-    restaurants = lounaat.hae_ravintolat()
-    session["restaurants"] = lounaat.fetch_restaurant_names()
-    lunches_today = lounaat.hae_lounaat_tanaan()
+    restaurants = lunches.fetch_restaurants()
+    session["restaurants"] = lunches.fetch_restaurant_names()
+    lunches_today = lunches.fetch_lunches_today()
     return render_template("index.html",restaurants=restaurants, lunches=lunches_today)
 
 @app.route("/restaurant/<int:id>")
 def restaurant(id):
-    restaurant = lounaat.hae_ravintola(id)
+    restaurant = lunches.fetch_restaurant(id)
 
-    lounaat_tanaan,lounaat_huomenna,lounaat_maanantai,lounaat_tiistai,lounaat_keskiviikko,lounaat_torstai,lounaat_perjantai = lounaat.hae_ravintolan_lounaat(id)
+    lunches_today,lunches_tomorrow,lunches_monday,lunches_tuesday,lunches_wednesday,lunches_thursday,lunches_friday = lunches.fetch_restaurant_lunches(id)
 
-    today,tomorrow,monday,tuesday,wednesday,thursday,friday=lounaat.hae_paivat()
+    today,tomorrow,monday,tuesday,wednesday,thursday,friday=lunches.fetch_dates()
 
-    reviews = lounaat.fetch_reviews(id)
-    average = lounaat.restaurant_average(id)
+    reviews = lunches.fetch_reviews(id)
+    average = lunches.restaurant_average(id)
 
     return render_template("restaurant.html", id=id, 
     restaurant=restaurant, 
-    lounaat_tanaan=lounaat_tanaan,
-    lounaat_huomenna=lounaat_huomenna,
-    lounaat_maanantai=lounaat_maanantai,
-    lounaat_tiistai=lounaat_tiistai,
-    lounaat_keskiviikko=lounaat_keskiviikko,
-    lounaat_torstai=lounaat_torstai,
-    lounaat_perjantai=lounaat_perjantai, 
+    lunches_today=lunches_today,
+    lunches_tomorrow=lunches_tomorrow,
+    lunches_monday=lunches_monday,
+    lunches_tuesday=lunches_tuesday,
+    lunches_wednesday=lunches_wednesday,
+    lunches_thursday=lunches_thursday,
+    lunches_friday=lunches_friday, 
     today=today, 
     tomorrow=tomorrow,
     monday=monday,
@@ -47,19 +47,24 @@ def restaurant(id):
 @app.route("/user")
 def user():
     favorites = []
-    if "username" in session:
-        username = session["username"]
-        favorites = users.get_favorites(username)
+    try:
+        if "username" in session:
+            username = session["username"]
+            favorites = users.get_favorites(username)
+    except:
+        pass        
     return render_template("login.html", favorites=favorites)  
 
 @app.route("/login",methods=["POST"])
 def login():
     username = request.form["username"]
     password = request.form["password"]
-    message = users.onko_oikein(username,password)  
+    message = users.check(username,password)  
     if message == "Kirjautuminen onnistui":            
         session["username"] = username
-        session["ravintola_id"] = users.kayttajan_ravintola_id(session["username"])
+        session["restaurant_id"] = users.restaurateur_id(session["username"])
+        print("RESTAURATEUR ID")
+        print(session["restaurant_id"])
         session["csrf_token"] = os.urandom(16).hex()
         flash(message,'success')
     else:
@@ -70,7 +75,7 @@ def login():
 def new_user():
     username = request.form["username"]
     password = request.form["password"]
-    if (users.luo_kayttaja(username,password)):
+    if (users.create_user(username,password)):
         message = "Tili luotu käyttäjälle " + username
         flash(message, 'success')
     else: 
@@ -82,7 +87,7 @@ def logout():
     try: 
         flash('Kirjauduit ulos.', 'success')
         del session["username"]
-        del session["ravintola_id"]
+        del session["restaurant_id"]
         del session["csrf_token"] 
         return redirect("/")   
     except:
@@ -91,18 +96,18 @@ def logout():
 
 @app.route("/lunch")
 def lunch():
-    id = session["ravintola_id"]
+    id = session["restaurant_id"]
     try:
-        lounaat_tanaan,lounaat_huomenna,lounaat_maanantai,lounaat_tiistai,lounaat_keskiviikko,lounaat_torstai,lounaat_perjantai = lounaat.hae_ravintolan_lounaat(id)
-        today,tomorrow,monday,tuesday,wednesday,thursday,friday=lounaat.hae_paivat()
+        lunches_today,lunches_tomorrow,lunches_monday,lunches_tuesday,lunches_wednesday,lunches_thursday,lunches_friday = lunches.fetch_restaurant_lunches(id)
+        today,tomorrow,monday,tuesday,wednesday,thursday,friday=lunches.fetch_dates()
         return render_template("addlunch.html", 
-        lounaat_tanaan=lounaat_tanaan,
-        lounaat_huomenna=lounaat_huomenna,
-        lounaat_maanantai=lounaat_maanantai,
-        lounaat_tiistai=lounaat_tiistai,
-        lounaat_keskiviikko=lounaat_keskiviikko,
-        lounaat_torstai=lounaat_torstai,
-        lounaat_perjantai=lounaat_perjantai, 
+        lunches_today=lunches_today,
+        lunches_tomorrow=lunches_tomorrow,
+        lunches_monday=lunches_monday,
+        lunches_tuesday=lunches_tuesday,
+        lunches_wednesday=lunches_wednesday,
+        lunches_thursday=lunches_thursday,
+        lunches_friday=lunches_friday, 
         today=today, 
         tomorrow=tomorrow,
         monday=monday,
@@ -111,25 +116,25 @@ def lunch():
         thursday=thursday,
         friday=friday,)
     except:    
-        pass
+        flash("Jotain meni vikaan ravintolasi lounaiden lataamisessa.", 'danger')
     
 
 @app.route("/addlunch",methods=["POST"])
 def add_lunch():
-    restaurant_id = session["ravintola_id"]
-    name = request.form["lounas"]
-    day = request.form["paivamaara"]
+    restaurant_id = session["restaurant_id"]
+    name = request.form["lunch"]
+    ondate = request.form["ondate"]
     if session["csrf_token"] != request.form["csrf_token"]:
         abort(403)
 
     if len(name) < 1 or len(name)>150:
         flash("Lounaan nimi ei voi olla tyhjä eikä yli 150 merkkiä", 'danger')
-    elif day=='':
+    elif ondate=='':
         flash("Lounaalta puuttuu päivämäärä", 'danger') 
     elif restaurant_id==0:
         flash("Sinulla ei ole oikeuksia lisätä lounaita.", 'danger') 
     elif restaurant_id!=0:  
-        lounaat.lisaa_lounas(name, day, restaurant_id)
+        lunches.add_lunch(name, ondate, restaurant_id)
         flash("Lounaan lisäys onnistui", 'success')
     else:
         flash("Lounaan lisäys ei onnistunut.", 'danger') 
@@ -143,11 +148,11 @@ def delete_lunch():
 
     lunch_id = request.form["lunch_id"]
 
-    if (lounaat.delete_lunch(lunch_id)):
+    if (lunches.delete_lunch(lunch_id)):
         flash("Lounas poistettu.", 'success')
     else:
         flash("Poistaminen ei onnistunut.", 'danger')
-
+        
     return redirect(request.referrer)
 
 @app.route("/addfavorite",methods=["POST"])
@@ -159,10 +164,11 @@ def add_favorite():
     if session["csrf_token"] != request.form["csrf_token"]:
         abort(403)
 
-    if (users.add_favorite(username,id)):
-        message = restaurant_name + " lisätty suosikkeihin!"
-        flash(message, 'success')
-    else: 
+    try:
+        if(users.add_favorite(username,id)):
+            message = restaurant_name + " lisätty suosikkeihin!"
+            flash(message, 'success')
+    except: 
         flash("Ravintola on jo suosikeissa.",'success')  
 
     return redirect(request.referrer)
@@ -173,7 +179,7 @@ def delete_favorite():
         abort(403)
 
     name = request.form["restaurant_name"]
-    id = lounaat.fetch_restaurant_id(name)
+    id = lunches.fetch_restaurant_id(name)
 
     if (users.delete_favorite(session["username"],id)):
         flash(name + " poistettu lemppareista", 'success')

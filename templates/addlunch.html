@@ -11,10 +11,10 @@
             
                 <form action="/addlunch" method="POST" id="addlunch" onsubmit="return check(this)">
                     <label>Lounas:</label> <br>
-                        <textarea name="lounas" form="addlunch" required></textarea><br>
+                        <textarea name="lunch" form="addlunch" required></textarea><br>
                     
-                    <label for="paivamaara">Päivämäärä:</label> <br>
-                        <input type="date" min="2021-03-01" max="2021-12-31" value="2021-03-01" id="paivamaara" name="paivamaara" required>
+                    <label for="ondate">Päivämäärä:</label> <br>
+                        <input type="date" min="2021-03-01" max="2021-12-31" value="2021-03-01" id="ondate" name="ondate" required>
                     <input type="submit" value="Lisää lounas">
                     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                 </form>
@@ -25,51 +25,51 @@
             <hr>
 
             <h4>Maanantai {{monday}}</h4>
-            {% for lounas in lounaat_maanantai %}
+            {% for lunch in lunches_monday %}
                 <form class="form-inline" action="/deletelunch" method="POST">
-                    <label>{{ lounas[1] }}</label>
+                    <label>{{ lunch[1] }}</label>
                     <input class="form-control" type="submit" value="Poista lounas">
-                    <input type="hidden" name="lunch_id" value="{{ lounas[0] }}">
+                    <input type="hidden" name="lunch_id" value="{{ lunch[0] }}">
                     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                 </form>
             {% endfor %}
 
             <h4>Tiistai {{tuesday}}</h4>
-            {% for lounas in lounaat_tiistai %}
+            {% for lunch in lunches_tuesday %}
                 <form class="form-inline" action="/deletelunch" method="POST">
-                    <label>{{ lounas[1] }}</label>
+                    <label>{{ lunch[1] }}</label>
                     <input class="form-control" type="submit" value="Poista lounas">
-                    <input type="hidden" name="lunch_id" value="{{ lounas[0] }}">
+                    <input type="hidden" name="lunch_id" value="{{ lunch[0] }}">
                     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                 </form>
             {% endfor %}
 
             <h4>Keskiviikko {{wednesday}}</h4>
-            {% for lounas in lounaat_keskiviikko %}
+            {% for lunch in lunches_wednesday %}
                 <form class="form-inline" action="/deletelunch" method="POST">
-                    <label>{{ lounas[1] }}</label>
+                    <label>{{ lunch[1] }}</label>
                     <input class="form-control" type="submit" value="Poista lounas">
-                    <input type="hidden" name="lunch_id" value="{{ lounas[0] }}">
+                    <input type="hidden" name="lunch_id" value="{{ lunch[0] }}">
                     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                 </form>
             {% endfor %}
 
             <h4>Torstai {{thursday}}</h4>
-            {% for lounas in lounaat_torstai %}
+            {% for lunch in lunches_thursday %}
                 <form class="form-inline" action="/deletelunch" method="POST">
-                    <label>{{ lounas[1] }}</label>
+                    <label>{{ lunch[1] }}</label>
                     <input class="form-control" type="submit" value="Poista lounas">
-                    <input type="hidden" name="lunch_id" value="{{ lounas[0] }}">
+                    <input type="hidden" name="lunch_id" value="{{ lunch[0] }}">
                     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                 </form>
             {% endfor %}
 
             <h4>Perjantai {{friday}}</h4>
-            {% for lounas in lounaat_perjantai %}
+            {% for lunch in lunches_friday %}
                 <form class="form-inline" action="/deletelunch" method="POST">
-                    <label>{{ lounas[1] }}</label>
+                    <label>{{ lunch[1] }}</label>
                     <input class="form-control" type="submit" value="Poista lounas">
-                    <input type="hidden" name="lunch_id" value="{{ lounas[0] }}">
+                    <input type="hidden" name="lunch_id" value="{{ lunch[0] }}">
                     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                 </form>
             {% endfor %} 
@@ -79,7 +79,7 @@
 
     <script>
         function check(form) {
-            if (form.lounas.value.length < 5 || form.lounas.value.length > 150) {
+            if (form.lunch.value.length < 5 || form.lunch.value.length > 150) {
                 alert("Lounas on liian lyhyt tai pitkä. Merkkejä saa olla 5-150.");
                 return false;
             }

@@ -13,14 +13,15 @@
         <hr>
         {% for restaurant in restaurants %}
           <h4>{{ restaurant [1] }}</h4>
+          <p class="info">
           {{ restaurant [2] }} <br>
           {{ restaurant [3] }} <br>
           {{ restaurant [4] }} <br>
           Lounaan hinta: {{ restaurant [5] }} 
-        
+          </p>
           {% for lunch in lunches %}
-            {% if lunch [4]==restaurant [0] %}
-              <h5>{{ lunch [1] }}</h5> <br>
+            {% if lunch [3]==restaurant [0] %}
+              {{ lunch [1] }} <br>
             {% endif %}  
           {% endfor %}  
         <hr>

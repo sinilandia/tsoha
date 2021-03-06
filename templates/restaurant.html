@@ -10,7 +10,7 @@
   <div class="row">
     <div class="col-6">
       <p>
-        <h2> {{ restaurant [0][1] }} </h2>
+        <h2> {{ restaurant [0][1] }} ☆{{ average[0] }}☆</h2>
         <p class="info">
           Osoite: {{ restaurant [0][2] }} <br>
           Puh: {{ restaurant [0][3]}} <br>
@@ -36,40 +36,40 @@
         <hr>
         <p>    
           <h4>Tänään {{ today }}</h4>
-          {% for lounas in lounaat_tanaan %}              
-            {{ lounas [1] }} <br>
+          {% for lunch in lunches_today %}              
+            {{ lunch [1] }} <br>
           {% endfor %}  
 
           <h4>Huomenna {{tomorrow}}</h4>
-          {% for lounas in lounaat_huomenna %}
-              {{ lounas [1] }}<br>
+          {% for lunch in lunches_tomorrow %}
+              {{ lunch [1] }}<br>
           {% endfor %}  
 
           <hr>
 
           <h4>Maanantai {{monday}}</h4>
-          {% for lounas in lounaat_maanantai %}
-              {{ lounas [1] }}<br>
+          {% for lunch in lunches_monday %}
+              {{ lunch [1] }}<br>
           {% endfor %}
 
           <h4>Tiistai {{tuesday}}</h4>
-          {% for lounas in lounaat_tiistai %}
-              {{ lounas [1] }}<br> 
+          {% for lunch in lunches_tuesday %}
+              {{ lunch [1] }}<br> 
           {% endfor %}
 
           <h4>Keskiviikko {{wednesday}}</h4>
-          {% for lounas in lounaat_keskiviikko %}
-            {{ lounas [1] }}<br>
+          {% for lunch in lunches_wednesday %}
+            {{ lunch [1] }}<br>
           {% endfor %}
    
           <h4>Torstai {{thursday}}</h4>
-          {% for lounas in lounaat_torstai %}
-              {{ lounas [1] }}<br>
+          {% for lunch in lunches_thursday %}
+              {{ lunch [1] }}<br>
           {% endfor %}
 
           <h4>Perjantai {{friday}}</h4>
-          {% for lounas in lounaat_perjantai %}
-              {{ lounas [1] }}<br>
+          {% for lunch in lunches_friday %}
+              {{ lunch [1] }}<br>
           {% endfor %}
        </p>
       <hr> 

@@ -11,7 +11,7 @@
             {% if session.username %}
                 <h2>Olet kirjautunut nimellä: {{ session.username }}</h2>
                 <a href="/logout">Kirjaudu ulos</a><br>
-            {% if session.ravintola_id!=0 %}
+            {% if session.restaurant_id!=0 %}
                 <a href="/lunch">Lounashallinta</a>
             {% endif %}    
   
