@@ -11,6 +11,11 @@
       <p>
      
         <hr>
+        <h4>&#11088 Paras ravintola: {{ best [0][0] }} {{best [0][1]}} &#11088</h4>
+        <h4>&#128077 Kaikkein lempparein: {{ best [1][0] }} {{best [1][1]}} kpl &#128077</h4>
+        <h4>&#9997 Eniten arvosteluja: {{ best [2][0] }} {{ best [2][1] }} kpl &#9997</h4>
+        <hr>
+
         {% for restaurant in restaurants_avgs %}
           <h4>{{ restaurant [1] }} ☆{{ restaurant [6] }}☆</h4>
           <p class="info">

@@ -128,13 +128,18 @@ def search(query):
     lunches = result.fetchall()
     return lunches
 
-# TÄMÄ OSIO ETUSIVULLE KARUSELLIKSI?
-# def fetch_reviews(restaurant_id):
-#     sql = "SELECT R.user_id, ravintolat.nimi, R.star, R.title, R.review, R.today FROM reviews R INNER JOIN ravintolat ON ravintolat.id=R.restaurant_id WHERE R.restaurant_id=:restaurant_id"
-#     result = db.session.execute(sql,{"restaurant_id":restaurant_id})
-#     reviews = result.fetchall()
-#     return reviews
-
-
-
-        
+def best_star():
+    best = []
+    sql = "SELECT R.name, AVG(E.star)::numeric(10,2), R.id FROM restaurants R INNER JOIN reviews E ON E.restaurant_id=R.id GROUP BY R.name, R.id ORDER BY AVG(E.star) DESC"
+    result = db.session.execute(sql)
+    one = result.fetchone()
+    best.append(one)
+    sql = "SELECT R.name, COUNT(F.restaurant_id), R.id FROM restaurants R INNER JOIN favorites F ON F.restaurant_id=R.id GROUP BY R.name, R.id ORDER BY COUNT(F.restaurant_id) DESC"
+    result = db.session.execute(sql)
+    one = result.fetchone()
+    best.append(one)
+    sql = "SELECT R.name, COUNT(E.restaurant_id), R.id FROM restaurants R INNER JOIN reviews E ON E.restaurant_id=R.id GROUP BY R.name, R.id ORDER BY COUNT(E.restaurant_id) DESC"
+    result = db.session.execute(sql)
+    one = result.fetchone()
+    best.append(one)
+    return best

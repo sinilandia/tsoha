@@ -12,7 +12,8 @@ def index():
     restaurants_avgs = lunches.restaurants_avgs()
     session["restaurants"] = lunches.fetch_restaurant_names()
     lunches_today = lunches.fetch_lunches_today()
-    return render_template("index.html",restaurants_avgs=restaurants_avgs, lunches=lunches_today)
+    best = lunches.best_star()
+    return render_template("index.html",restaurants_avgs=restaurants_avgs, lunches=lunches_today, best=best)
 
 @app.route("/restaurant/<int:id>")
 def restaurant(id):
