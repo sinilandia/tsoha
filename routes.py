@@ -169,8 +169,9 @@ def add_favorite():
         if(users.add_favorite(username,id)):
             message = restaurant_name + " lisätty suosikkeihin!"
             flash(message, 'success')
+        else: flash("Ravintola on jo suosikeissa.", 'success')
     except: 
-        flash("Ravintola on jo suosikeissa.",'success')  
+        flash("Jotain meni pieleen suosikkeihin lisäämisessä.",'danger')  
 
     return redirect(request.referrer)
 
