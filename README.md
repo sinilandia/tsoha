@@ -23,7 +23,9 @@ Ravintoloitsijana voit päivittää ja poistaa ravintolasi lounaat.
 
 **Kirjautumissivulla** näkyy kirjautumattomalle käyttäjälle lomake luoda tunnukset tai kirjautua sisään.
 Kirjautuneena käyttäjä näkee omat lemppariravintolansa, voi poistaa lempparin ja kirjautua ulos. 
-Kirjautuneena ravintoloitsija näkee näiden lisäksi linkin Lounashallinnan sivulle, josta pääsee lisäämään lounaita ja tarvittaessa poistamaan lounaan tältä viikolta, jos sattuu typo.
+Kirjautuneena ravintoloitsija näkee näiden lisäksi linkin Lounashallinnan sivulle, josta pääsee lisäämään lounaita ja tarvittaessa poistamaan lounaan tältä viikolta, jos sattuu typo. Täällä näkyy vain lounaat ma-pe eli jos testaat viikonloppuna la-su, et näe la-su lounaita. Tämä on realistinen ratkaisu, koska lounaita harvemmin on la-su. 
+
+**Haku** hakee lounaiden nimistä, ei väliä onko iso vai pieni kirjain. Haku näyttää viimeisimmät lounaat ensin, sillä tämä on todennäköisesti tärkeä kriteeri hakijalle.
 
 **SQL-taulut**
 - restaurants
