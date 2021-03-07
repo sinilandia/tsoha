@@ -3,37 +3,30 @@ tsoha k2021
 
 # Heroku-sovelluksen testaus
 https://tsoha-lounaslarussa.herokuapp.com/
+Luo itsellesi tunnukset, joilla pääset testaamaan sovellusta.
 
-Tällä hetkellä toimii etusivu, Puhuri, Borneo, Makers ja Casa Mare. Etusivu näyttää lounaat tänään. Ravintolan oma sivu näyttää tämän viikon lounaat. 
-
-Käyttäjät voivat luoda tilin ja kirjautua. Käyttäjät voivat yrittää lisätä lounaita siinä kuitenkaan onnistumatta.
-
-Jos haluaa ravintoloitsija-tilin, ylläpitäjän pitää käydä tämä erikseen muuttamassa tietokantataulussa. Tätä voi testata tunnuksilla Puhuri, salasana ravintola. Ravintoloitsija voi lisätä lounaita.
+Ravintoloitsijoiden tunnukset ovat muotoa Ravintolannimi, salasana ravintola, esim. Puhuri, ravintola.
 
 ## Aihe: Lounas Larussa
 Näe kätevästi kaikki Lauttasaaren lounaspaikat yhdestä paikkaa!
-Voit myös peukuttamalla ilmoittaa, minne olet menossa tänään. Näin voidaan välttyä ruuhkilta ja pystymme helpommin pitämään turvaväleistä huolta.
 
-Lounailijana voit luoda itsellesi tunnukset sivustolle ja arvioida lounaskokemuksesi.
+Ruokailijana voit luoda itsellesi tunnukset sivustolle, lisätä ravintolan lemppareihin ja arvioida lounaskokemuksesi.
 
-Ravintoloitsijana voit luoda omat tunnukset ja päivittää ravintolasi lounaat. 
+Ravintoloitsijana voit päivittää ja poistaa ravintolasi lounaat. 
 
 ### Keskeiset toiminnot
 
-**Etusivulta** löydät kartan kaikista Lauttasaaren lounaspaikoista.
-Kartan alla näkyvät ravintolat ja niiden lounaat listana allekkain. 
+**Etusivulta** löydät lounaspaikat aakkosjärjestyksessä. Tähtiarvio on keskiarvo ravintolalle jätetyistä arvioista. Jos arvioita ei ole, tähdet näyttävät 0. Sivulla näkyy vain tämän päivän lounaat (eli jos testaat sovellusta viikonloppuna, lounaita ei välttämättä ole). Myös navigaatiopalkki on aakkosjärjestyksessä. 
 
-**Ravintolakohtaiselta** sivulta löydät ravintolan tiedot ja näet koko viikon lounaslistan. Täältä löytyy myös ravintola kartalta. Täältä näet ravintolan lounaiden suosion tähtinä/peukkuina.
+**Ravintolakohtaiselta** sivulta löydät ravintolan tiedot ja näet koko viikon lounaslistan. Tämän lisäksi voit kirjautuneena käyttäjänä lisätä arvion ravintolasta ja merkata ravintolan lemppariksi. Arviointilomake näkyy tarkoituksella myös kirjautumattomille käyttäjille, koska haluan kannustaa käyttäjiä luomaan tunnukset palveluun. 
 
-Jatkossa tänne voi myös kirjoittaa oman arvion ravintolan lounaskokemuksesta.
+**Kirjautumissivulla** näkyy kirjautumattomalle käyttäjälle lomake luoda tunnukset tai kirjautua sisään.
+Kirjautuneena käyttäjä näkee omat lemppariravintolansa, voi poistaa lempparin ja kirjautua ulos. 
+Kirjautuneena ravintoloitsija näkee näiden lisäksi linkin Lounashallinnan sivulle, josta pääsee lisäämään lounaita ja tarvittaessa poistamaan lounaan tältä viikolta, jos sattuu typo.
 
 **SQL-taulut**
-- ravintolat
-- lounaat
-- kayttajat
-
-Pitää vielä lisätä
-- Arvostelut ravintoloille
-- peukut/tähdet annoksille, onnistuu kirjautumatta
-- käyttäjän oma sivu, jolla näkyy omat arvostelut
-- navigaation haku ravintolat-taulun mukaan
+- restaurants
+- lunches
+- users
+- favorites 
+- reviews
