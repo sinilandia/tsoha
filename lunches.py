@@ -121,6 +121,13 @@ def restaurants_avgs():
     averages = result.fetchall()
     return averages
 
+
+def search(query):
+    sql = "SELECT L.name, L.ondate, R.name FROM lunches L INNER JOIN restaurants R ON L.restaurant_id = R.id AND L.name ILIKE :query ORDER BY L.ondate DESC"
+    result = db.session.execute(sql, {"query":"%"+query+"%"})
+    lunches = result.fetchall()
+    return lunches
+
 # TÄMÄ OSIO ETUSIVULLE KARUSELLIKSI?
 # def fetch_reviews(restaurant_id):
 #     sql = "SELECT R.user_id, ravintolat.nimi, R.star, R.title, R.review, R.today FROM reviews R INNER JOIN ravintolat ON ravintolat.id=R.restaurant_id WHERE R.restaurant_id=:restaurant_id"

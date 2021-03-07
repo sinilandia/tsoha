@@ -1,0 +1,41 @@
+<!doctype html>
+{% extends "layout.html" %}
+{% block title %}Hakutulokset{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>Lounaat, viimeisin ensin</h2>
+            {% for result in results %}                
+                {% if monday==result[1] %}
+                    <h6>{{ result [2] }} Maanantai {{ result [1] }}</h6>
+                    <li>{{ result [0] }}</li> 
+                {% endif %}
+
+                {% if tuesday==result[1] %}
+                    <h6>{{ result [2] }} Tiistai {{ result [1] }}</h6>
+                    <li>{{ result [0] }}</li> 
+                {% endif %}
+
+                {% if wednesday==result[1] %}
+                    <h6>{{ result [2] }} Keskiviikko {{ result [1] }}</h6>
+                    <li>{{ result [0] }}</li>
+                {% endif %}
+
+                {% if thursday==result[1] %}
+                    <h6>{{ result [2] }} Torstai {{ result [1] }}</h6>
+                    <li>{{ result [0] }}</li> 
+                {% endif %}
+
+                {% if friday==result[1] %}
+                    <h6>{{ result [2] }} Perjantai {{ result [1] }}</h6>
+                    <li>{{ result [0] }}</li> 
+                {% endif %}
+            {% endfor %}
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}

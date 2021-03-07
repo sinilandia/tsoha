@@ -114,7 +114,7 @@ def lunch():
         tuesday=tuesday,
         wednesday=wednesday,
         thursday=thursday,
-        friday=friday,)
+        friday=friday)
     except:    
         flash("Jotain meni vikaan ravintolasi lounaiden lataamisessa.", 'danger')
     
@@ -205,3 +205,17 @@ def add_review():
         flash("Arvion lisääminen ei onnistunut.",'danger')  
 
     return redirect(request.referrer)
+
+@app.route("/search")
+def search():
+    query = request.args["query"]
+    results = lunches.search(query)
+    today,tomorrow,monday,tuesday,wednesday,thursday,friday=lunches.fetch_dates()
+    return render_template("result.html", results=results,
+    today=today, 
+    tomorrow=tomorrow,
+    monday=monday,
+    tuesday=tuesday,
+    wednesday=wednesday,
+    thursday=thursday,
+    friday=friday)
