@@ -17,9 +17,9 @@ Ravintoloitsijana voit päivittää ja poistaa ravintolasi lounaat.
 
 ### Keskeiset toiminnot
 
-**Etusivulta** löydät lounaspaikat aakkosjärjestyksessä. Tähtiarvio on keskiarvo ravintolalle jätetyistä arvioista. Jos arvioita ei ole, tähdet näyttävät 0. Sivulla näkyy vain tämän päivän lounaat (eli jos testaat sovellusta viikonloppuna, lounaita ei välttämättä ole). Myös navigaatiopalkki on aakkosjärjestyksessä. 
+**Etusivulta** löydät top-listan ja lounaspaikat aakkosjärjestyksessä. Tähtiarvio on keskiarvo ravintolalle jätetyistä arvioista. Jos arvioita ei ole, tähdet näyttävät 0. Sivulla näkyy vain tämän päivän lounaat (eli jos testaat sovellusta viikonloppuna, lounaita ei välttämättä ole). Myös navigaatiopalkki on aakkosjärjestyksessä. 
 
-**Ravintolakohtaiselta** sivulta löydät ravintolan tiedot ja näet koko viikon lounaslistan. Tämän lisäksi voit kirjautuneena käyttäjänä lisätä arvion ravintolasta ja merkata ravintolan lemppariksi. Arviointilomake näkyy tarkoituksella myös kirjautumattomille käyttäjille, koska haluan kannustaa käyttäjiä luomaan tunnukset palveluun. 
+**Ravintolakohtaiselta** sivulta löydät ravintolan tiedot ja näet koko viikon lounaslistan. Tämän lisäksi voit kirjautuneena käyttäjänä lisätä arvion ravintolasta ja merkata ravintolan lemppariksi. Käyttäjä ei voi poistaa arviotaan myöhemmin, kuten AirBnB:ssä. Tarkoituksena on lisätä arvioiden luotettavuutta. Arviointilomake näkyy tarkoituksella myös kirjautumattomille käyttäjille, koska haluan kannustaa käyttäjiä luomaan tunnukset palveluun. 
 
 **Kirjautumissivulla** näkyy kirjautumattomalle käyttäjälle lomake luoda tunnukset tai kirjautua sisään.
 Kirjautuneena käyttäjä näkee omat lemppariravintolansa, voi poistaa lempparin ja kirjautua ulos. 
