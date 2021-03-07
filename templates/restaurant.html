@@ -37,39 +37,39 @@
         <p>    
           <h4>Tänään {{ today }}</h4>
           {% for lunch in lunches_today %}              
-            {{ lunch [1] }} <br>
+            <li>{{ lunch [1] }}</li>
           {% endfor %}  
 
           <h4>Huomenna {{tomorrow}}</h4>
           {% for lunch in lunches_tomorrow %}
-              {{ lunch [1] }}<br>
+            <li>{{ lunch [1] }}</li>
           {% endfor %}  
 
           <hr>
 
           <h4>Maanantai {{monday}}</h4>
           {% for lunch in lunches_monday %}
-              {{ lunch [1] }}<br>
+            <li>{{ lunch [1] }}</li>
           {% endfor %}
 
           <h4>Tiistai {{tuesday}}</h4>
           {% for lunch in lunches_tuesday %}
-              {{ lunch [1] }}<br> 
+            <li>{{ lunch [1] }}</li>
           {% endfor %}
 
           <h4>Keskiviikko {{wednesday}}</h4>
           {% for lunch in lunches_wednesday %}
-            {{ lunch [1] }}<br>
+            <li>{{ lunch [1] }}</li>
           {% endfor %}
    
           <h4>Torstai {{thursday}}</h4>
           {% for lunch in lunches_thursday %}
-              {{ lunch [1] }}<br>
+            <li>{{ lunch [1] }}</li>
           {% endfor %}
 
           <h4>Perjantai {{friday}}</h4>
           {% for lunch in lunches_friday %}
-              {{ lunch [1] }}<br>
+            <li>{{ lunch [1] }}</li>
           {% endfor %}
        </p>
       <hr> 

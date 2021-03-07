@@ -9,10 +9,10 @@ from os import urandom
 
 @app.route("/")
 def index():
-    restaurants = lunches.fetch_restaurants()
+    restaurants_avgs = lunches.restaurants_avgs()
     session["restaurants"] = lunches.fetch_restaurant_names()
     lunches_today = lunches.fetch_lunches_today()
-    return render_template("index.html",restaurants=restaurants, lunches=lunches_today)
+    return render_template("index.html",restaurants_avgs=restaurants_avgs, lunches=lunches_today)
 
 @app.route("/restaurant/<int:id>")
 def restaurant(id):

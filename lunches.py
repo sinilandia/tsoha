@@ -2,7 +2,7 @@ from db import db
 from datetime import date, datetime, timedelta
 
 def fetch_restaurants():
-    result = db.session.execute("SELECT * FROM restaurants")
+    result = db.session.execute("SELECT * FROM restaurants ORDER BY name ASC")
     restaurants = result.fetchall()
     return restaurants
 
@@ -103,6 +103,23 @@ def restaurant_average(restaurant_id):
     average = result.fetchone()
     return average
 
+def restaurants_avgs():
+    sql = ("SELECT \
+	R.id, \
+	R.name, \
+	R.address, \
+	R.phone, \
+	R.email, \
+	R.price, \
+	COALESCE(AVG(A.star)::numeric(10,2),0) AS avg \
+    FROM reviews A \
+    RIGHT JOIN restaurants R \
+    ON R.id=A.restaurant_id \
+    GROUP BY R.id \
+    ORDER BY R.name ASC")
+    result = db.session.execute(sql)
+    averages = result.fetchall()
+    return averages
 
 # TÄMÄ OSIO ETUSIVULLE KARUSELLIKSI?
 # def fetch_reviews(restaurant_id):
